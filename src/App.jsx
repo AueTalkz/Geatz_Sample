@@ -11,9 +11,12 @@ import Projects from './pages/Projects';
 function App() {
   return (
     <>
-      <div className="bg-orb orb-purple"></div>
-      <div className="bg-orb orb-blue"></div>
-      <div className="bg-orb orb-pink"></div>
+      <div className="bg-mesh">
+        <div className="bg-orb orb-purple"></div>
+        <div className="bg-orb orb-blue"></div>
+        <div className="bg-orb orb-pink"></div>
+        <div className="noise-overlay"></div>
+      </div>
 
       <Navbar />
       
