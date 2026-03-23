@@ -20,9 +20,9 @@ export default function Hero() {
         </p>
         
         <div className="hero-buttons reveal-up active">
-          <Link to="/services" className="btn btn-primary btn-glow">
+          <a href="#divisions" className="btn btn-primary btn-glow">
             Explore Our World
-          </Link>
+          </a>
           <a href="#contact" className="btn btn-outline">
             Start Your Journey
           </a>

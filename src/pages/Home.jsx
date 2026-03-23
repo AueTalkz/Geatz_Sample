@@ -14,7 +14,7 @@ export default function Home() {
       <Hero />
       
       {/* Divisions Side-by-Side */}
-      <section className="division-section">
+      <section id="divisions" className="division-section">
         <div className="container">
           <div className="grid-container two-cols">
             {/* GDz Column */}
