@@ -68,9 +68,9 @@ export default function Navbar() {
           </li>
 
           <li>
-            <Link to="/projects">
+            <a href="#projects" onClick={(e) => handleLinkClick(e, '#projects')}>
               Projects
-            </Link>
+            </a>
           </li>
           <li>
             <a href="#team" onClick={(e) => handleLinkClick(e, '#team')}>
