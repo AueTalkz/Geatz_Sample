@@ -52,15 +52,29 @@ body {
   overflow: hidden;
   z-index: -1;
   background-color: #050505;
+  background-image: url('/assets/backgrounds/abstract_bg.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+.bg-mesh::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 50%, rgba(5, 5, 5, 0.4) 0%, #050505 100%);
+  z-index: 1;
 }
 
 .bg-orb {
   position: absolute;
   border-radius: 50%;
   filter: blur(140px);
-  opacity: 0.35;
+  opacity: 0.25; /* Slightly reduced opacity to blend with image */
   animation: float 25s infinite alternate ease-in-out;
   pointer-events: none;
+  z-index: 2; /* Orbs should be above the gradient overlay but below content */
 }
 
 .orb-purple {
