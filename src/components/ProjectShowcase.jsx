@@ -76,13 +76,24 @@ export default function ProjectShowcase() {
                     whileTap={{ scale: 0.98 }}
                     style={{ background: `linear-gradient(135deg, ${project.imageColor}44, ${project.imageColor}22)`, height: '350px' }}
                   >
-                    <div className="showcase-tag" style={{ color: project.imageColor }}>
+                    <div className="showcase-tag" style={{ color: project.imageColor, textShadow: `0 0 10px ${project.imageColor}44` }}>
                       {project.category.toUpperCase()}
                     </div>
-                    <h3 style={{ fontSize: '1.5rem' }}>{project.title}</h3>
-                    <div className="view-case-btn" style={{ borderColor: project.imageColor, color: project.imageColor }}>
+                    <h3 style={{ fontSize: '1.5rem', color: '#fff', textShadow: '0 2px 10px rgba(0,0,0,0.3)' }}>{project.title}</h3>
+                    <motion.div 
+                      className="view-case-btn" 
+                      style={{ 
+                        borderColor: project.imageColor, 
+                        color: project.imageColor,
+                        display: 'inline-block' 
+                      }}
+                      whileHover={{ 
+                        backgroundColor: project.imageColor,
+                        color: '#ffffff',
+                      }}
+                    >
                       View Project
-                    </div>
+                    </motion.div>
                   </motion.div>
                 </Link>
               </div>
@@ -128,13 +139,24 @@ export default function ProjectShowcase() {
                   className="showcase-image glass-card"
                   style={{ background: `linear-gradient(135deg, ${project.imageColor}44, ${project.imageColor}22)` }}
                 >
-                  <div className="showcase-tag" style={{ color: project.imageColor }}>
+                  <div className="showcase-tag" style={{ color: project.imageColor, textShadow: `0 0 10px ${project.imageColor}44` }}>
                     {project.category.toUpperCase()}
                   </div>
-                  <h3>{project.title}</h3>
-                  <div className="view-case-btn" style={{ borderColor: project.imageColor, color: project.imageColor }}>
+                  <h3 style={{ color: '#fff', textShadow: '0 2px 10px rgba(0,0,0,0.3)' }}>{project.title}</h3>
+                  <motion.div 
+                    className="view-case-btn" 
+                    style={{ 
+                      borderColor: project.imageColor, 
+                      color: project.imageColor,
+                    }}
+                    whileHover={{ 
+                      backgroundColor: project.imageColor,
+                      color: '#ffffff',
+                      boxShadow: `0 0 20px ${project.imageColor}66`
+                    }}
+                  >
                     Explore Case Study
-                  </div>
+                  </motion.div>
                 </div>
               </Link>
             </motion.div>
