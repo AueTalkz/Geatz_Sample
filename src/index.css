@@ -446,6 +446,17 @@ body {
   display: flex;
   gap: 25px;
   justify-content: center;
+  margin-top: 40px;
+}
+
+.hero-btns-desktop {
+  justify-content: flex-start;
+}
+
+@media (max-width: 1024px) {
+  .hero-btns-desktop {
+    justify-content: center;
+  }
 }
 
 .btn-glow {

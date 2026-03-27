@@ -50,7 +50,7 @@ export default function Hero() {
             Empowering brands through high-performance development and cinematic media creation. Your vision, our architecture.
           </motion.p>
 
-          <motion.div variants={itemVars} className="hero-buttons">
+          <motion.div variants={itemVars} className="hero-buttons hero-btns-desktop">
             <Magnetic>
               <a href="#divisions" className="btn btn-primary btn-glow">
                 Explore Our World
@@ -78,7 +78,7 @@ export default function Hero() {
         className="scroll-indicator"
         initial={{ opacity: 0 }}
         animate={{ opacity: 0.5 }}
-        style={{ position: 'absolute', bottom: '40px', left: '50%', transform: 'translateX(-50%)' }}
+        style={{ position: 'absolute', bottom: '30px', left: '50%', transform: 'translateX(-50%)' }}
       >
         <span>Scroll to Discover</span>
         <div className="scroll-arrow">
