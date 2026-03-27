@@ -4,6 +4,8 @@ import Hero from '../components/Hero';
 import Team from '../components/Team';
 import Contact from '../components/Contact';
 import Magnetic from '../components/Magnetic';
+import ProjectShowcase from '../components/ProjectShowcase';
+import Testimonials from '../components/Testimonials';
 
 export default function Home() {
   const cardVariantsLeft = {
@@ -87,6 +89,10 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <ProjectShowcase />
+
+      <Testimonials />
 
       <Team />
       <Contact />

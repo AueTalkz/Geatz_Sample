@@ -13,6 +13,8 @@ import CustomCursor from './components/CustomCursor';
 import ScrollProgress from './components/ScrollProgress';
 import PageWrapper from './components/PageWrapper';
 import FloatingBackground from './components/FloatingBackground';
+import ProjectDetail from './pages/ProjectDetail';
+import NotFound from './pages/NotFound';
 
 function App() {
   const location = useLocation();
@@ -31,6 +33,8 @@ function App() {
           <Route path="/gdz" element={<PageWrapper><GDzPage /></PageWrapper>} />
           <Route path="/gez" element={<PageWrapper><GEzPage /></PageWrapper>} />
           <Route path="/projects" element={<PageWrapper><Projects /></PageWrapper>} />
+          <Route path="/project/:id" element={<PageWrapper><ProjectDetail /></PageWrapper>} />
+          <Route path="*" element={<PageWrapper><NotFound /></PageWrapper>} />
         </Routes>
       </AnimatePresence>
 
