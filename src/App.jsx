@@ -13,6 +13,7 @@ import ProjectDetail from './pages/ProjectDetail';
 import NotFound from './pages/NotFound';
 import ScrollToTop from './components/ScrollToTop';
 import ScrollProgress from './components/ScrollProgress';
+import BackToTop from './components/BackToTop';
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
       </div>
       
       <CustomCursor />
+      <BackToTop />
       
       <Navbar />
       
