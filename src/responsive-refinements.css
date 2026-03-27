@@ -1,0 +1,71 @@
+/* Responsive Refinements for Mobile Smoothness */
+
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 3.2rem !important;
+    letter-spacing: -1px;
+    line-height: 1.1;
+  }
+  
+  .hero-subtitle {
+    font-size: 1rem !important;
+    margin-bottom: 40px !important;
+  }
+
+  .navbar {
+    width: 95% !important;
+    bottom: 20px !important;
+    padding: 10px 12px !important;
+  }
+
+  .nav-links a {
+    font-size: 0.72rem !important;
+    letter-spacing: 0 !important;
+  }
+
+  .testimonial-card {
+    padding: 40px 20px !important;
+  }
+
+  .testimonial-text {
+    font-size: 1.25rem !important;
+    margin-bottom: 30px !important;
+    line-height: 1.4 !important;
+  }
+
+  .division-card {
+    padding: 40px 20px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-title {
+    font-size: 2.8rem !important;
+  }
+
+  .navbar {
+    bottom: 15px !important;
+    padding: 8px 10px !important;
+  }
+
+  .nav-links a {
+    font-size: 0.65rem !important;
+  }
+}
+
+/* Base styles for new classes */
+.testimonial-card {
+  padding: 80px;
+}
+
+.testimonial-text {
+  font-size: 1.8rem;
+  font-style: italic;
+  margin-bottom: 40px;
+  line-height: 1.5;
+}
+
+.division-card {
+  text-align: center;
+  padding: 60px 40px;
+}

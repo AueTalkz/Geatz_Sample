@@ -37,8 +37,7 @@ export default function Home() {
             
             {/* GDz Column */}
             <motion.div 
-              className="glass-card blue-glow" 
-              style={{ textAlign: 'center', padding: '60px 40px' }}
+              className="glass-card blue-glow division-card" 
               variants={cardVariantsLeft}
               initial="hidden"
               whileInView="visible"
@@ -63,8 +62,7 @@ export default function Home() {
 
             {/* GEz Column */}
             <motion.div 
-              className="glass-card pink-glow" 
-              style={{ textAlign: 'center', padding: '60px 40px' }}
+              className="glass-card pink-glow division-card" 
               variants={cardVariantsRight}
               initial="hidden"
               whileInView="visible"

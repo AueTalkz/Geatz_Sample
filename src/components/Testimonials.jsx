@@ -39,29 +39,29 @@ export default function Testimonials() {
           <h2 className="section-title">Global <span className="gradient-text">Trust</span></h2>
         </div>
 
-        <div className="glass-card" style={{ padding: '80px', textAlign: 'center', position: 'relative' }}>
+        <div className="glass-card testimonial-card" style={{ textAlign: 'center', position: 'relative' }}>
           <div style={{ position: 'absolute', top: '20px', left: '40px', fontSize: '10rem', opacity: 0.05, fontWeight: 900 }}>“</div>
-          <AnimatePresence mode="wait">
+          <AnimatePresence mode="wait" initial={false}>
             <motion.div
               key={index}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.8 }}
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -20 }}
+              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
             >
               <div 
                 className="member-avatar" 
                 style={{ 
-                  margin: '0 auto 40px', 
-                  width: '80px', 
-                  height: '80px', 
+                  margin: '0 auto 30px', 
+                  width: '70px', 
+                  height: '70px', 
                   background: 'linear-gradient(135deg, var(--brand-purple), var(--brand-blue))',
-                  fontSize: '1.8rem'
+                  fontSize: '1.6rem'
                 }}
               >
                 {testimonials[index].avatar}
               </div>
-              <p style={{ fontSize: '1.8rem', fontStyle: 'italic', marginBottom: '40px', lineHeight: 1.5 }}>
+              <p className="testimonial-text">
                 "{testimonials[index].text}"
               </p>
               <h4 style={{ fontSize: '1.2rem', marginBottom: '5px' }}>{testimonials[index].name}</h4>

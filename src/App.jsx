@@ -2,6 +2,7 @@ import { Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import CustomCursor from './components/CustomCursor';
+import SmoothScroll from './components/SmoothScroll';
 
 // Pages
 import Home from './pages/Home';
@@ -15,7 +16,7 @@ import ScrollProgress from './components/ScrollProgress';
 
 function App() {
   return (
-    <>
+    <SmoothScroll>
       <ScrollToTop />
       <ScrollProgress />
       <div className="bg-mesh">
@@ -39,7 +40,7 @@ function App() {
       </Routes>
 
       <Footer />
-    </>
+    </SmoothScroll>
   );
 }
 

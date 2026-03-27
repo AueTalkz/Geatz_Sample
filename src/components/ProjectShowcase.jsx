@@ -1,5 +1,5 @@
-import { useRef } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { useRef, useState, useEffect } from 'react';
+import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 import { Link } from 'react-router-dom';
 
 const projects = [
@@ -31,16 +31,71 @@ const projects = [
 
 export default function ProjectShowcase() {
   const targetRef = useRef(null);
+  const [windowWidth, setWindowWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 1200);
+
+  useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const isMobile = windowWidth <= 768;
+
   const { scrollYProgress } = useScroll({
     target: targetRef,
+    offset: ["start end", "end start"]
   });
 
-  const x = useTransform(scrollYProgress, [0, 1], ['1%', '-75%']);
+  const rawX = useTransform(scrollYProgress, [0.2, 0.8], ['1%', '-75%']);
+  const springX = useSpring(rawX, { stiffness: 100, damping: 30, restDelta: 0.001 });
+  
+  // Only apply transform on desktop
+  const x = isMobile ? undefined : springX;
+
+  if (isMobile) {
+    return (
+      <section className="division-section" id="showcase">
+        <div className="container">
+          <div className="division-header" style={{ textAlign: 'left', marginBottom: '40px' }}>
+            <h2 className="section-title">
+              Our <span className="gradient-text">Showcase</span>
+            </h2>
+            <p className="section-desc" style={{ marginLeft: 0 }}>
+              Crafting premium digital experiences through development and media.
+            </p>
+          </div>
+          <div className="grid-container">
+            {projects.map((project) => (
+              <div 
+                key={project.id} 
+                className="showcase-item"
+              >
+                <Link to={`/project/${project.id}`} className="showcase-link">
+                  <motion.div 
+                    className="showcase-image glass-card"
+                    whileTap={{ scale: 0.98 }}
+                    style={{ background: `linear-gradient(135deg, ${project.imageColor}44, ${project.imageColor}22)`, height: '350px' }}
+                  >
+                    <div className="showcase-tag" style={{ color: project.imageColor }}>
+                      {project.category.toUpperCase()}
+                    </div>
+                    <h3 style={{ fontSize: '1.5rem' }}>{project.title}</h3>
+                    <div className="view-case-btn" style={{ borderColor: project.imageColor, color: project.imageColor }}>
+                      View Project
+                    </div>
+                  </motion.div>
+                </Link>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section ref={targetRef} className="horizontal-scroll-section">
       <div className="sticky-container">
-        
         <div className="container">
           <motion.div 
             className="showcase-header"
@@ -52,13 +107,15 @@ export default function ProjectShowcase() {
               Our <span className="gradient-text">Showcase</span>
             </h2>
             <p className="section-desc" style={{ marginLeft: 0 }}>
-              Scroll down to explore our most innovative projects through 
-              a horizontal cinematic experience.
+              Scroll down to explore our most innovative projects through a horizontal cinematic experience.
             </p>
           </motion.div>
         </div>
 
-        <motion.div style={{ x }} className="horizontal-content">
+        <motion.div 
+          style={{ x }} 
+          className="horizontal-content container"
+        >
           {projects.map((project) => (
             <motion.div 
               key={project.id} 

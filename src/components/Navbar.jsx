@@ -61,10 +61,10 @@ export default function Navbar() {
       initial={{ y: 0, x: "-50%", opacity: 1 }}
       variants={{
         visible: { y: 0, x: "-50%", opacity: 1 },
-        hidden: { y: 100, x: "-50%", opacity: 0 },
+        hidden: { y: "150%", x: "-50%", opacity: 0 },
       }}
       animate={hidden ? "hidden" : "visible"}
-      transition={{ duration: 0.35, ease: "easeInOut" }}
+      transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
     >
       <div className="nav-container">
         <Link to="/" className="logo" onClick={() => scrollToTarget('#')}>
