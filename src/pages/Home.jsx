@@ -1,13 +1,28 @@
 import { Link } from 'react-router-dom';
-import { useScrollReveal } from '../hooks/useScrollReveal';
+import { motion } from 'framer-motion';
 import Hero from '../components/Hero';
 import Team from '../components/Team';
-import Projects from '../components/Projects';
 import Contact from '../components/Contact';
+import Magnetic from '../components/Magnetic';
 
 export default function Home() {
+  const cardVariantsLeft = {
+    hidden: { opacity: 0, x: -50 },
+    visible: { 
+      opacity: 1, 
+      x: 0, 
+      transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } 
+    }
+  };
 
-  useScrollReveal();
+  const cardVariantsRight = {
+    hidden: { opacity: 0, x: 50 },
+    visible: { 
+      opacity: 1, 
+      x: 0, 
+      transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } 
+    }
+  };
 
   return (
     <>
@@ -17,8 +32,17 @@ export default function Home() {
       <section id="divisions" className="division-section">
         <div className="container">
           <div className="grid-container two-cols">
+            
             {/* GDz Column */}
-            <div className="glass-card blue-glow reveal-left" style={{ textAlign: 'center', padding: '60px 40px' }}>
+            <motion.div 
+              className="glass-card blue-glow" 
+              style={{ textAlign: 'center', padding: '60px 40px' }}
+              variants={cardVariantsLeft}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-100px" }}
+              whileHover={{ scale: 1.02, translateY: -10 }}
+            >
               <h2 className="section-title" style={{ fontSize: '3rem', marginBottom: '25px' }}>
                 Geatz <span className="gradient-text-blue">Devolperz</span>
               </h2>
@@ -26,13 +50,25 @@ export default function Home() {
                 A Department in GGz where Development phases, UX & UI are meticulously designed for clients.
               </p>
               <div className="hero-buttons" style={{ marginTop: '50px', gap: '20px' }}>
-                <Link to="/gdz" className="btn btn-primary" style={{ minWidth: '160px' }}>Detailed View</Link>
-                <a href="#contact" className="btn btn-outline" style={{ minWidth: '160px' }}>Contact</a>
+                <Magnetic>
+                  <Link to="/gdz" className="btn btn-primary" style={{ minWidth: '160px' }}>Detailed View</Link>
+                </Magnetic>
+                <Magnetic>
+                  <a href="#contact" className="btn btn-outline" style={{ minWidth: '160px' }}>Contact</a>
+                </Magnetic>
               </div>
-            </div>
+            </motion.div>
 
             {/* GEz Column */}
-            <div className="glass-card pink-glow reveal-right" style={{ textAlign: 'center', padding: '60px 40px' }}>
+            <motion.div 
+              className="glass-card pink-glow" 
+              style={{ textAlign: 'center', padding: '60px 40px' }}
+              variants={cardVariantsRight}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-100px" }}
+              whileHover={{ scale: 1.02, translateY: -10 }}
+            >
               <h2 className="section-title" style={{ fontSize: '3rem', marginBottom: '25px' }}>
                 Geatz <span className="gradient-text-pink">Entertainmentz</span>
               </h2>
@@ -40,20 +76,20 @@ export default function Home() {
                 A Department in GGz where Content Creation & related stuff like Content Shoots, Scripts, Writing.
               </p>
               <div className="hero-buttons" style={{ marginTop: '50px', gap: '20px' }}>
-                <Link to="/gez" className="btn btn-primary" style={{ minWidth: '160px' }}>Detailed View</Link>
-                <a href="#contact" className="btn btn-outline" style={{ minWidth: '160px' }}>Contact</a>
+                <Magnetic>
+                  <Link to="/gez" className="btn btn-primary" style={{ minWidth: '160px' }}>Detailed View</Link>
+                </Magnetic>
+                <Magnetic>
+                  <a href="#contact" className="btn btn-outline" style={{ minWidth: '160px' }}>Contact</a>
+                </Magnetic>
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
-
-
 
       <Team />
       <Contact />
     </>
   );
 }
-
-

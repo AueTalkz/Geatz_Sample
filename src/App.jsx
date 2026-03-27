@@ -1,4 +1,5 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom';
+import { AnimatePresence } from 'framer-motion';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 
@@ -7,29 +8,34 @@ import Home from './pages/Home';
 import GDzPage from './pages/GDzPage';
 import GEzPage from './pages/GEzPage';
 import Projects from './pages/Projects';
+import SmoothScroll from './components/SmoothScroll';
+import CustomCursor from './components/CustomCursor';
+import ScrollProgress from './components/ScrollProgress';
+import PageWrapper from './components/PageWrapper';
+import FloatingBackground from './components/FloatingBackground';
 
 function App() {
+  const location = useLocation();
+  
   return (
-    <>
-      <div className="bg-mesh">
-        <div className="bg-orb orb-purple"></div>
-        <div className="bg-orb orb-blue"></div>
-        <div className="bg-orb orb-pink"></div>
-        <div className="noise-overlay"></div>
-      </div>
+    <SmoothScroll>
+      <ScrollProgress />
+      <CustomCursor />
+      <FloatingBackground />
 
       <Navbar />
       
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/gdz" element={<GDzPage />} />
-        <Route path="/gez" element={<GEzPage />} />
-        <Route path="/projects" element={<Projects />} />
-      </Routes>
+      <AnimatePresence mode="wait">
+        <Routes location={location} key={location.pathname}>
+          <Route path="/" element={<PageWrapper><Home /></PageWrapper>} />
+          <Route path="/gdz" element={<PageWrapper><GDzPage /></PageWrapper>} />
+          <Route path="/gez" element={<PageWrapper><GEzPage /></PageWrapper>} />
+          <Route path="/projects" element={<PageWrapper><Projects /></PageWrapper>} />
+        </Routes>
+      </AnimatePresence>
 
-      
       <Footer />
-    </>
+    </SmoothScroll>
   );
 }
 

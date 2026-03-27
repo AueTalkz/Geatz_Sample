@@ -1,3 +1,5 @@
+import { motion } from 'framer-motion';
+
 export default function Team() {
   const teamMembers = [
     {
@@ -26,40 +28,76 @@ export default function Team() {
     }
   ];
 
+  const containerVars = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1
+      }
+    }
+  };
 
+  const itemVars = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] }
+    }
+  };
 
   return (
     <section id="team" className="division-section">
       <div className="container">
-        <div className="division-header reveal-up">
+        <motion.div 
+          className="division-header"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
           <h2 className="section-title">
             Our <span className="gradient-text">Team</span>
           </h2>
           <p className="section-desc">
             The minds behind the magic. A collective of creators, engineers, and strategists.
           </p>
-        </div>
+        </motion.div>
 
-        <div className="grid-container">
+        <motion.div 
+          className="grid-container"
+          variants={containerVars}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-50px" }}
+        >
           {teamMembers.map((member, index) => (
-            <div className="glass-card reveal-up white-glow" key={index} style={{ textAlign: 'center' }}>
-              <div 
+            <motion.div 
+              className="glass-card white-glow" 
+              key={index} 
+              style={{ textAlign: 'center' }}
+              variants={itemVars}
+              whileHover={{ scale: 1.05, translateY: -10 }}
+            >
+              <motion.div 
                 className="member-avatar" 
                 style={{ 
                   background: `linear-gradient(135deg, ${member.color}44, ${member.color}22)`,
                   border: `1px solid ${member.color}44`
                 }}
+                whileHover={{ rotate: 10, scale: 1.1 }}
               >
                 {member.name.charAt(0)}
-              </div>
+              </motion.div>
               <h3 style={{ marginBottom: '10px' }}>{member.name}</h3>
               <div style={{ color: member.color, fontSize: '0.9rem', fontWeight: 700, marginBottom: '20px', textTransform: 'uppercase', letterSpacing: '1px' }}>
                 {member.role}
               </div>
               <p style={{ color: 'var(--text-secondary)', fontSize: '1rem' }}>{member.bio}</p>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
