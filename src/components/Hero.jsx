@@ -1,9 +1,7 @@
 import { motion } from 'framer-motion';
 import Lottie from 'lottie-react';
 import Magnetic from './Magnetic';
-
-// Using a reliable CDN placeholder for Lottie world/tech animation
-const lottie_url = "https://assets9.lottiefiles.com/packages/lf20_q5pk6p1k.json";
+import worldAnimation from '../assets/world_animation.json';
 
 export default function Hero() {
   const containerVars = {
@@ -78,11 +76,7 @@ export default function Hero() {
           style={{ maxWidth: '500px' }}
         >
           {/* We'll use a direct CDN URL for a placeholder, or a simple path */}
-          <Lottie 
-            animationData={require('../assets/world_animation.json')} 
-            loop={true} 
-            onError={() => <div style={{ height: '300px', background: 'radial-gradient(circle, var(--brand-blue) 0%, transparent 70%)', opacity: 0.3 }}></div>}
-          />
+          <div style={{ height: '300px', background: 'radial-gradient(circle, var(--brand-blue) 0%, transparent 70%)', opacity: 0.3 }}></div>
         </motion.div>
       </div>
 

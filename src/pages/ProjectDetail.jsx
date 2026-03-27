@@ -19,6 +19,7 @@ export default function ProjectDetail() {
       ],
       stack: ['React', 'NodeJS', 'MongoDB', 'Framer Motion'],
       color: '#06b6d4',
+      liveLink: '#'
     },
     'brand-identity-launch': {
       title: 'Brand Identity Launch',
@@ -31,6 +32,7 @@ export default function ProjectDetail() {
       ],
       stack: ['After Effects', 'Photoshop', 'Final Cut Pro', 'Stable Diffusion'],
       color: '#db2777',
+      liveLink: '#'
     },
     'saas-dashboard': {
       title: 'SaaS Dashboard',
@@ -43,6 +45,7 @@ export default function ProjectDetail() {
       ],
       stack: ['Next.js', 'PostgreSQL', 'Chart.js', 'Tailwind CSS'],
       color: '#2563eb',
+      liveLink: '#'
     },
     'cinematic-promo-video': {
       title: 'Cinematic Promo Video',
@@ -55,6 +58,7 @@ export default function ProjectDetail() {
       ],
       stack: ['4K Cinema Camera', 'Davinci Resolve', 'Color Grading', 'Sound Design'],
       color: '#9333ea',
+      liveLink: '#'
     },
   };
 
@@ -78,9 +82,14 @@ export default function ProjectDetail() {
             <h1 className="section-title" style={{ fontSize: 'clamp(3rem, 7vw, 6rem)', marginBottom: '30px' }}>
               {project.title}
             </h1>
-            <p className="section-desc" style={{ marginLeft: '0', fontSize: '1.4rem', color: 'var(--text-secondary)' }}>
+            <p className="section-desc" style={{ marginLeft: '0', fontSize: '1.4rem', color: 'var(--text-secondary)', marginBottom: '40px' }}>
               {project.description}
             </p>
+            <div style={{ display: 'flex', gap: '20px' }}>
+              <a href={project.liveLink} target="_blank" rel="noopener noreferrer" className="btn btn-primary btn-glow">
+                View Live Project
+              </a>
+            </div>
           </motion.div>
         </div>
       </section>
@@ -129,6 +138,30 @@ export default function ProjectDetail() {
               </div>
             </motion.div>
           </div>
+        </div>
+      </section>
+
+      <section className="detail-footer section-padding" style={{ paddingBottom: '100px', textAlign: 'center' }}>
+        <div className="container">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="glass-card"
+            style={{ padding: '80px 40px', borderStyle: 'dashed' }}
+          >
+            <h2 className="section-title" style={{ fontSize: '2.5rem', marginBottom: '40px' }}>
+              Want to see <span className="gradient-text">More?</span>
+            </h2>
+            <div style={{ display: 'flex', gap: '20px', justifyContent: 'center', flexWrap: 'wrap' }}>
+              <Link to="/projects" className="btn btn-primary btn-glow">
+                Explore All Projects
+              </Link>
+              <Link to="/" className="btn btn-outline">
+                Back to Home
+              </Link>
+            </div>
+          </motion.div>
         </div>
       </section>
     </div>
