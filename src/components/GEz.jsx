@@ -47,6 +47,21 @@ export default function GEz() {
             </ul>
           </div>
         </div>
+        
+        <div className="cta-container reveal-up">
+          <div className="glass-card cta-card-pink">
+            <div className="cta-content">
+              <h3>Have a vision we can capture?</h3>
+              <p>Everything from storyboarding to the final edit, we create content that speaks to your audience through high-end production.</p>
+              <div className="process-mini-pink">
+                <div className="process-step-pink"><span>1</span> Ideation</div>
+                <div className="process-step-pink"><span>2</span> Production</div>
+                <div className="process-step-pink"><span>3</span> Post-Design</div>
+              </div>
+              <a href="#contact" className="btn btn-primary-pink btn-glow-pink">Start a Project</a>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );

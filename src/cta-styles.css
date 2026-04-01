@@ -1,0 +1,112 @@
+/* CTA Section Styles for GDz and GEz */
+
+.cta-container {
+  margin-top: 80px;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.cta-card, .cta-card-pink {
+  max-width: 800px;
+  width: 100%;
+  padding: 60px;
+  text-align: center;
+  border-radius: 24px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.cta-card {
+  border: 1px solid rgba(37, 99, 235, 0.2);
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.05), rgba(5, 5, 5, 0.3));
+}
+
+.cta-card-pink {
+  border: 1px solid rgba(219, 39, 119, 0.2);
+  background: linear-gradient(135deg, rgba(219, 39, 119, 0.05), rgba(5, 5, 5, 0.3));
+}
+
+.cta-content h3 {
+  font-size: 2.2rem;
+  margin-bottom: 20px;
+  background: #fff;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.cta-content p {
+  font-size: 1.1rem;
+  color: #a0a0ab;
+  max-width: 600px;
+  margin: 0 auto 40px;
+  line-height: 1.6;
+}
+
+.process-mini, .process-mini-pink {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+}
+
+.process-step, .process-step-pink {
+  font-size: 0.9rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #fff;
+}
+
+.process-step span, .process-step-pink span {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.process-step span {
+  background: #2563eb;
+  box-shadow: 0 0 15px rgba(37, 99, 235, 0.5);
+}
+
+.process-step-pink span {
+  background: #db2777;
+  box-shadow: 0 0 15px rgba(219, 39, 119, 0.5);
+}
+
+.btn-primary-pink {
+  background: #db2777;
+  color: #fff !important;
+}
+
+.btn-glow-pink:hover {
+  box-shadow: 0 0 25px rgba(219, 39, 119, 0.4);
+  transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+  .cta-container {
+    margin-top: 60px;
+  }
+  .cta-card, .cta-card-pink {
+    padding: 40px 20px;
+  }
+  .cta-content h3 {
+    font-size: 1.7rem;
+    -webkit-text-fill-color: #fff;
+  }
+  .process-mini, .process-mini-pink {
+    gap: 15px;
+    flex-direction: column;
+    align-items: center;
+  }
+}

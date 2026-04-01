@@ -67,6 +67,21 @@ export default function GDz() {
             </ul>
           </div>
         </div>
+        
+        <div className="cta-container reveal-up">
+          <div className="glass-card cta-card">
+            <div className="cta-content">
+              <h3>Ready to build your digital future?</h3>
+              <p>From initial UX discovery to full-stack deployment, we bring your vision to life with precision and transparency.</p>
+              <div className="process-mini">
+                <div className="process-step"><span>1</span> Consultation</div>
+                <div className="process-step"><span>2</span> UI/UX Design</div>
+                <div className="process-step"><span>3</span> Development</div>
+              </div>
+              <a href="#contact" className="btn btn-primary btn-glow">Start a Project</a>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );
