@@ -110,3 +110,10 @@
     align-items: center;
   }
 }
+
+.card-text-sm {
+  font-size: 1rem;
+  color: #a0a0ab;
+  line-height: 1.6;
+  margin-top: 10px;
+}
