@@ -542,7 +542,7 @@ body {
   margin-bottom: 24px;
   line-height: 1.25; /* More generous line-height */
   letter-spacing: -2px;
-  text-align: left;
+  text-align: center;
 }
 
 .section-desc {
@@ -551,6 +551,7 @@ body {
   color: var(--text-secondary);
   font-size: 1.2rem;
   line-height: 1.8;
+  text-align: center;
 }
 
 /* Grid & Cards */
