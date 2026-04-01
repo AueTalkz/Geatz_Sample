@@ -56,7 +56,7 @@ export default function ProjectShowcase() {
     return (
       <section className="division-section" id="showcase">
         <div className="container">
-          <div className="division-header" style={{ textAlign: 'left', marginBottom: '40px' }}>
+          <div className="division-header" style={{ marginBottom: '40px' }}>
             <h2 className="section-title">
               Our <span className="gradient-text">Showcase</span>
             </h2>

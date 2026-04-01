@@ -36,6 +36,10 @@
   .division-card {
     padding: 40px 20px !important;
   }
+
+  .section-title, .section-desc, h2, h3, h4 {
+    text-align: center !important;
+  }
 }
 
 @media (max-width: 480px) {
