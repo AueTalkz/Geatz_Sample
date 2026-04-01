@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 export default function GDz() {
   return (
     <section id="gdz" className="division-section">
@@ -78,7 +80,7 @@ export default function GDz() {
                 <div className="process-step"><span>2</span> UI/UX Design</div>
                 <div className="process-step"><span>3</span> Development</div>
               </div>
-              <a href="#contact" className="btn btn-primary btn-glow">Start a Project</a>
+              <Link to="/start-a-project" className="btn btn-primary btn-glow">Start a Project</Link>
             </div>
           </div>
         </div>

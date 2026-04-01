@@ -10,6 +10,7 @@ import GDzPage from './pages/GDzPage';
 import GEzPage from './pages/GEzPage';
 import Projects from './pages/Projects';
 import ProjectDetail from './pages/ProjectDetail';
+import StartProjectPage from './pages/StartProjectPage';
 import NotFound from './pages/NotFound';
 import ScrollToTop from './components/ScrollToTop';
 import ScrollProgress from './components/ScrollProgress';
@@ -38,6 +39,7 @@ function App() {
         <Route path="/gez" element={<GEzPage />} />
         <Route path="/projects" element={<Projects />} />
         <Route path="/project/:id" element={<ProjectDetail />} />
+        <Route path="/start-a-project" element={<StartProjectPage />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
 

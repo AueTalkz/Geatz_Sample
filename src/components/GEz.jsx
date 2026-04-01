@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 export default function GEz() {
   return (
     <section id="gez" className="division-section">
@@ -58,7 +60,7 @@ export default function GEz() {
                 <div className="process-step-pink"><span>2</span> Production</div>
                 <div className="process-step-pink"><span>3</span> Post-Design</div>
               </div>
-              <a href="#contact" className="btn btn-primary-pink btn-glow-pink">Start a Project</a>
+              <Link to="/start-a-project" className="btn btn-primary-pink btn-glow-pink">Start a Project</Link>
             </div>
           </div>
         </div>
