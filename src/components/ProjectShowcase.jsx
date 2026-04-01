@@ -60,7 +60,7 @@ export default function ProjectShowcase() {
             <h2 className="section-title">
               Our <span className="gradient-text">Showcase</span>
             </h2>
-            <p className="section-desc" style={{ marginLeft: 0 }}>
+            <p className="section-desc">
               Crafting premium digital experiences through development and media.
             </p>
           </div>
@@ -117,7 +117,7 @@ export default function ProjectShowcase() {
             <h2 className="section-title">
               Our <span className="gradient-text">Showcase</span>
             </h2>
-            <p className="section-desc" style={{ marginLeft: 0 }}>
+            <p className="section-desc">
               Scroll down to explore our most innovative projects through a horizontal cinematic experience.
             </p>
           </motion.div>
