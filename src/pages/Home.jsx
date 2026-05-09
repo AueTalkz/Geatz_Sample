@@ -44,22 +44,22 @@ export default function Home() {
               whileInView="visible"
               viewport={{ once: true, margin: "-100px" }}
             >
-              <TiltCard className="glass-card blue-glow division-card" style={{ textAlign: 'center' }}>
-                <div style={{ height: '180px', marginBottom: '20px' }}>
-                  <Globe3D color="#2563eb" height="180px" />
+              <TiltCard className="glass-card blue-glow division-card" style={{ textAlign: 'center', minHeight: isMobile ? 'auto' : '550px' }}>
+                <div style={{ height: isMobile ? '140px' : '180px', marginBottom: isMobile ? '10px' : '20px' }}>
+                  <Globe3D color="#2563eb" height={isMobile ? '140px' : '180px'} />
                 </div>
-                <h2 className="section-title" style={{ fontSize: '2.5rem', marginBottom: '20px' }}>
+                <h2 className="section-title" style={{ fontSize: isMobile ? '1.8rem' : '2.5rem', marginBottom: '15px' }}>
                   Geatz <span className="gradient-text-blue">Devolperz</span>
                 </h2>
-                <p className="section-desc" style={{ fontSize: '1.1rem', lineHeight: '1.6', margin: '0 auto 30px', maxWidth: '400px' }}>
+                <p className="section-desc" style={{ fontSize: isMobile ? '0.95rem' : '1.1rem', lineHeight: '1.5', margin: '0 auto 25px', maxWidth: '350px' }}>
                   A Department in GGz where Development phases, UX & UI are meticulously designed for clients.
                 </p>
-                <div className="hero-buttons" style={{ gap: '15px', justifyContent: 'center' }}>
+                <div className="hero-buttons" style={{ gap: '10px', justifyContent: 'center', marginTop: 'auto' }}>
                   <Magnetic>
-                    <Link to="/gdz" className="btn btn-primary" style={{ minWidth: '140px' }}>Detailed View</Link>
+                    <Link to="/gdz" className="btn btn-primary" style={{ minWidth: '130px', padding: '12px 20px', fontSize: '0.9rem' }}>Detailed View</Link>
                   </Magnetic>
                   <Magnetic>
-                    <a href="#contact" className="btn btn-outline" style={{ minWidth: '140px' }}>Contact</a>
+                    <a href="#contact" className="btn btn-outline" style={{ minWidth: '130px', padding: '12px 20px', fontSize: '0.9rem' }}>Contact</a>
                   </Magnetic>
                 </div>
               </TiltCard>
@@ -72,22 +72,22 @@ export default function Home() {
               whileInView="visible"
               viewport={{ once: true, margin: "-100px" }}
             >
-              <TiltCard className="glass-card pink-glow division-card" style={{ textAlign: 'center' }}>
-                <div style={{ height: '180px', marginBottom: '20px' }}>
-                  <Globe3D color="#db2777" height="180px" />
+              <TiltCard className="glass-card pink-glow division-card" style={{ textAlign: 'center', minHeight: isMobile ? 'auto' : '550px' }}>
+                <div style={{ height: isMobile ? '140px' : '180px', marginBottom: isMobile ? '10px' : '20px' }}>
+                  <Globe3D color="#db2777" height={isMobile ? '140px' : '180px'} />
                 </div>
-                <h2 className="section-title" style={{ fontSize: '2.5rem', marginBottom: '20px' }}>
+                <h2 className="section-title" style={{ fontSize: isMobile ? '1.8rem' : '2.5rem', marginBottom: '15px' }}>
                   Geatz <span className="gradient-text-pink">Entertainmentz</span>
                 </h2>
-                <p className="section-desc" style={{ fontSize: '1.1rem', lineHeight: '1.6', margin: '0 auto 30px', maxWidth: '400px' }}>
+                <p className="section-desc" style={{ fontSize: isMobile ? '0.95rem' : '1.1rem', lineHeight: '1.5', margin: '0 auto 25px', maxWidth: '350px' }}>
                   A Department in GGz where Content Creation & related stuff like Content Shoots, Scripts, Writing.
                 </p>
-                <div className="hero-buttons" style={{ gap: '15px', justifyContent: 'center' }}>
+                <div className="hero-buttons" style={{ gap: '10px', justifyContent: 'center', marginTop: 'auto' }}>
                   <Magnetic>
-                    <Link to="/gez" className="btn btn-primary" style={{ minWidth: '140px' }}>Detailed View</Link>
+                    <Link to="/gez" className="btn btn-primary" style={{ minWidth: '130px', padding: '12px 20px', fontSize: '0.9rem' }}>Detailed View</Link>
                   </Magnetic>
                   <Magnetic>
-                    <a href="#contact" className="btn btn-outline" style={{ minWidth: '140px' }}>Contact</a>
+                    <a href="#contact" className="btn btn-outline" style={{ minWidth: '130px', padding: '12px 20px', fontSize: '0.9rem' }}>Contact</a>
                   </Magnetic>
                 </div>
               </TiltCard>
