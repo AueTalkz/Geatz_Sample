@@ -7,57 +7,60 @@ import logo from '../assets/logo.png';
 
 function LogoBubble() {
   const meshRef = useRef();
-  const logoRef = useRef();
   const texture = useLoader(THREE.TextureLoader, logo);
   const { mouse, viewport } = useThree();
 
   useFrame((state) => {
     const time = state.clock.getElapsedTime();
     if (meshRef.current) {
-      meshRef.current.rotation.y = time * 0.15;
-      meshRef.current.rotation.x = Math.sin(time * 0.2) * 0.1;
+      // Smooth continuous rotation
+      meshRef.current.rotation.y = time * 0.2;
       
-      // Parallax effect
-      const targetX = (mouse.x * viewport.width) / 12;
-      const targetY = (mouse.y * viewport.height) / 12;
+      // Magnetic tilt towards mouse
+      const tiltX = (mouse.y * Math.PI) / 6; // Up to 30 degrees
+      const tiltY = (mouse.x * Math.PI) / 6;
+      
+      meshRef.current.rotation.x = THREE.MathUtils.lerp(meshRef.current.rotation.x, -tiltX, 0.1);
+      meshRef.current.rotation.z = THREE.MathUtils.lerp(meshRef.current.rotation.z, -tiltY * 0.5, 0.1);
+
+      // Breathing pulse effect
+      const pulse = 1 + Math.sin(time * 1.5) * 0.05;
+      meshRef.current.scale.set(pulse, pulse, pulse);
+      
+      // Dynamic parallax
+      const targetX = (mouse.x * viewport.width) / 10;
+      const targetY = (mouse.y * viewport.height) / 10;
       meshRef.current.position.x = THREE.MathUtils.lerp(meshRef.current.position.x, targetX, 0.05);
       meshRef.current.position.y = THREE.MathUtils.lerp(meshRef.current.position.y, targetY, 0.05);
     }
   });
 
   return (
-    <Float speed={2} rotationIntensity={0.5} floatIntensity={1}>
+    <Float speed={4} rotationIntensity={0.2} floatIntensity={0.5}>
       <mesh ref={meshRef}>
         {/* The Glass Bubble */}
         <Sphere args={[1.8, 64, 64]}>
           <meshPhysicalMaterial
             roughness={0}
             transmission={1}
-            thickness={0.5}
-            envMapIntensity={1.5}
+            thickness={1}
+            envMapIntensity={2}
             clearcoat={1}
-            clearcoatRoughness={0.1}
+            clearcoatRoughness={0}
             color="#ffffff"
+            attenuationColor="#2563eb"
+            attenuationDistance={0.5}
           />
         </Sphere>
 
-        {/* The Logo inside/on the bubble */}
-        <Sphere args={[1.81, 64, 64]}>
+        {/* The Logo with high-quality mapping */}
+        <Sphere args={[1.82, 64, 64]}>
           <meshBasicMaterial transparent opacity={0} />
           <Decal
             position={[0, 0, 0]}
             rotation={[0, 0, 0]}
-            scale={[2.5, 2.5, 2.5]}
+            scale={[3, 3, 3]}
             map={texture}
-          />
-        </Sphere>
-        
-        {/* Inner glow */}
-        <Sphere args={[1.5, 32, 32]}>
-          <meshBasicMaterial 
-            color="#2563eb" 
-            transparent 
-            opacity={0.05} 
           />
         </Sphere>
       </mesh>
