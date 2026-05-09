@@ -1191,3 +1191,125 @@ textarea.form-input {
     gap: 8px;
   }
 }
+/* Division Detail Pages */
+.division-detail-section {
+  padding: 0 0 100px 0;
+  overflow: hidden;
+}
+
+.division-hero {
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background: radial-gradient(circle at center, rgba(37, 99, 235, 0.05) 0%, transparent 70%);
+  padding: 120px 20px 60px;
+}
+
+.division-hero.pink-theme {
+  background: radial-gradient(circle at center, rgba(219, 39, 119, 0.05) 0%, transparent 70%);
+}
+
+.hero-globe-wrapper {
+  margin-bottom: -40px;
+  z-index: 1;
+}
+
+.hero-title-lg {
+  font-size: clamp(3rem, 8vw, 6rem);
+  font-weight: 900;
+  letter-spacing: -2px;
+  margin-bottom: 20px;
+  line-height: 1;
+}
+
+.hero-subtitle {
+  font-size: clamp(1.1rem, 2vw, 1.5rem);
+  color: var(--text-dim);
+  max-width: 700px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  margin: -50px auto 100px;
+  position: relative;
+  z-index: 10;
+  max-width: 1000px;
+}
+
+.stat-item {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+  padding: 30px;
+  border-radius: 20px;
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: transform 0.3s ease;
+}
+
+.stat-item:hover {
+  transform: translateY(-5px);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.stat-num {
+  display: block;
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #2563eb;
+  margin-bottom: 5px;
+}
+
+.pink-stats .stat-num {
+  color: #db2777;
+}
+
+.stat-label {
+  font-size: 0.9rem;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.cta-section-simple {
+  margin-top: 100px;
+  text-align: center;
+  padding: 80px 40px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.02) 0%, transparent 100%);
+  border-radius: 40px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.centered {
+  justify-content: center;
+}
+
+@media (max-width: 768px) {
+  .stats-grid {
+    grid-template-columns: 1fr;
+    margin: 40px 0 60px;
+    gap: 15px;
+  }
+  
+  .division-hero {
+    min-height: 60vh;
+    padding-top: 100px;
+  }
+  
+  .hero-globe-wrapper {
+    margin-bottom: 0;
+  }
+  
+  .stat-item {
+    padding: 20px;
+  }
+  
+  .stat-num {
+    font-size: 2rem;
+  }
+}
