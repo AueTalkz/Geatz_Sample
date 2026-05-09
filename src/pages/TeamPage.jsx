@@ -15,19 +15,7 @@ export default function TeamPage() {
           <div className="division-hero-content">
             <div className="hero-globe-placeholder" style={{ height: '50px' }}></div>
             
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="hero-text-center"
-            >
-              <h1 className="hero-title-lg">
-                The <span className="gradient-text">Collective</span>
-              </h1>
-              <p className="hero-subtitle">
-                United by a passion for high-fidelity digital experiences and cinematic excellence.
-              </p>
-            </motion.div>
+            <div style={{ height: '100px' }}></div>
           </div>
         </div>
       </div>
