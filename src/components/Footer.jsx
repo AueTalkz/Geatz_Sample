@@ -10,10 +10,9 @@ export default function Footer() {
           </div>
           
           <div className="footer-links">
-            <a href="/gdz">Geatz Developerz</a>
-            <a href="/gez">Geatz Entertainmentz</a>
-            <a href="/team">Team</a>
+            <a href="https://www.linkedin.com/company/geatz-groupz/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
             <a href="https://www.instagram.com/geatz_groupz/" target="_blank" rel="noopener noreferrer">Instagram</a>
+            <a href="#contact">Contact</a>
           </div>
         </div>
 
