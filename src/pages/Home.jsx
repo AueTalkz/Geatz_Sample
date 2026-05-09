@@ -8,8 +8,12 @@ import Testimonials from '../components/Testimonials';
 import ProjectShowcase from '../components/ProjectShowcase';
 import TiltCard from '../components/TiltCard';
 import Globe3D from '../components/Globe3D';
+import { useWindowSize } from '../hooks/useWindowSize';
 
 export default function Home() {
+  const { width } = useWindowSize();
+  const isMobile = width < 768;
+
   const cardVariantsLeft = {
     hidden: { opacity: 0, x: -50 },
     visible: { 
