@@ -117,35 +117,37 @@ function BackgroundElements() {
         />
       </points>
 
-      <Float speed={2} rotationIntensity={0.5} floatIntensity={0.5}>
-        <Sphere ref={sphereRef} args={[1.5, 100, 100]} position={[isMobile ? -2 : 5, 0, -10]}>
-          <MeshDistortMaterial
-            color="#2563eb"
-            attach="material"
-            distort={0.4}
-            speed={2}
-            roughness={0.1}
-            metalness={0.9}
-            clearcoat={1}
-            clearcoatRoughness={0.1}
-          />
-        </Sphere>
-      </Float>
-
       {!isMobile && (
-        <Float speed={3} rotationIntensity={1} floatIntensity={1}>
-          <Sphere args={[0.8, 64, 64]} position={[-6, 3, -12]}>
-            <MeshDistortMaterial
-              color="#db2777"
-              attach="material"
-              distort={0.6}
-              speed={4}
-              roughness={0.1}
-              metalness={0.8}
-              clearcoat={1}
-            />
-          </Sphere>
-        </Float>
+        <>
+          <Float speed={2} rotationIntensity={0.5} floatIntensity={0.5}>
+            <Sphere ref={sphereRef} args={[1.5, 100, 100]} position={[5, 0, -10]}>
+              <MeshDistortMaterial
+                color="#2563eb"
+                attach="material"
+                distort={0.4}
+                speed={2}
+                roughness={0.1}
+                metalness={0.9}
+                clearcoat={1}
+                clearcoatRoughness={0.1}
+              />
+            </Sphere>
+          </Float>
+
+          <Float speed={3} rotationIntensity={1} floatIntensity={1}>
+            <Sphere args={[0.8, 64, 64]} position={[-6, 3, -12]}>
+              <MeshDistortMaterial
+                color="#db2777"
+                attach="material"
+                distort={0.6}
+                speed={4}
+                roughness={0.1}
+                metalness={0.8}
+                clearcoat={1}
+              />
+            </Sphere>
+          </Float>
+        </>
       )}
       
       <ContactShadows 
