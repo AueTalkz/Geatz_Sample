@@ -173,7 +173,7 @@ export default function Scene3D() {
       height: '100%',
       pointerEvents: 'none',
       zIndex: -1,
-      background: '#050505'
+      background: 'radial-gradient(circle at center, #0a0a1a 0%, #050505 100%)'
     }}>
       <Canvas dpr={[1, 2]}>
         <PerspectiveCamera makeDefault position={[0, 0, 15]} fov={45} />
