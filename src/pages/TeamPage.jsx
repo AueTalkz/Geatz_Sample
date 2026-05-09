@@ -4,22 +4,12 @@ import Seo from '../components/Seo';
 
 export default function TeamPage() {
   return (
-    <div className="team-page">
+    <div className="team-page" style={{ paddingTop: '100px' }}>
       <Seo 
         title="Our Team - The Geatz Groupz Collective" 
         description="Meet the minds behind Geatz Groupz. A collection of visionaries, engineers, and creators."
       />
       
-      <div className="division-hero" style={{ minHeight: '50vh', background: 'radial-gradient(circle at center, rgba(168, 85, 247, 0.05) 0%, transparent 70%)' }}>
-        <div className="container">
-          <div className="division-hero-content">
-            <div className="hero-globe-placeholder" style={{ height: '50px' }}></div>
-            
-            <div style={{ height: '100px' }}></div>
-          </div>
-        </div>
-      </div>
-
       <Team />
 
       <div className="container" style={{ paddingBottom: '100px' }}>
