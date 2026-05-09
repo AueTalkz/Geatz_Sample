@@ -1,7 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { motion, useScroll, useMotionValueEvent } from 'framer-motion';
 import Magnetic from './Magnetic';
+import logo from '../assets/logo.png';
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -67,15 +68,18 @@ export default function Navbar() {
       transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
     >
       <div className="nav-container">
-        <Link to="/" className="logo" onClick={() => scrollToTarget('#')}>
-          <span className="logo-bold">GEATZ</span>
-          <span className="logo-light">GROUPZ</span>
+        <Link to="/" className="logo" onClick={() => scrollToTarget('#')} style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+          <img src={logo} alt="GGz Logo" style={{ height: '36px', width: 'auto' }} />
+          <div style={{ display: 'flex', flexDirection: 'column', lineHeight: '1.1' }}>
+            <span className="logo-bold" style={{ fontSize: '1.2rem', letterSpacing: '1px' }}>GGz</span>
+            <span className="logo-light" style={{ fontSize: '0.65rem', opacity: 0.6, letterSpacing: '0.5px' }}>GEATZ GROUPZ</span>
+          </div>
         </Link>
         <ul className="nav-links">
           <li className="mobile-only">
             <Magnetic>
               <Link to="/" onClick={() => scrollToTarget('#')} className="mobile-logo">
-                <span className="logo-bold">G</span><span className="logo-light">G</span>
+                <img src={logo} alt="GGz" style={{ height: '30px' }} />
               </Link>
             </Magnetic>
           </li>

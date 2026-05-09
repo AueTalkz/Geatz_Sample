@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import Magnetic from '../components/Magnetic';
+import logo from '../assets/logo.png';
 
 export default function NotFound() {
   return (
@@ -23,6 +24,7 @@ export default function NotFound() {
       </motion.h1>
       
       <div style={{ position: 'relative', zIndex: 10 }}>
+        <img src={logo} alt="GGz Logo" style={{ height: '80px', marginBottom: '30px' }} />
         <h2 style={{ fontSize: '3rem', marginBottom: '20px' }}>Lost in Space?</h2>
         <p style={{ color: 'var(--text-secondary)', marginBottom: '50px', fontSize: '1.2rem' }}>
           It looks like you've reached a dimension that doesn't exist.

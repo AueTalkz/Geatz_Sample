@@ -1,3 +1,5 @@
+import logo from '../assets/logo.png';
+
 export default function Footer() {
   const year = new Date().getFullYear();
 
@@ -5,8 +7,8 @@ export default function Footer() {
     <footer className="new-footer">
       <div className="container footer-inner">
         <div className="footer-top-row">
-          <div className="footer-brand">
-            <div className="ge-logo-box">GG</div>
+          <div className="footer-brand" style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
+            <img src={logo} alt="GGz Logo" style={{ height: '45px', width: 'auto' }} />
             <span className="footer-logo-text">
               <span className="white-text">GEATZ</span> <span className="purple-text">GROUPZ</span>
             </span>
