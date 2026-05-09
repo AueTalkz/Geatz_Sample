@@ -2,8 +2,10 @@ import { useRef } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { Float, Icosahedron, MeshDistortMaterial, PerspectiveCamera, Environment, MeshWobbleMaterial } from '@react-three/drei';
 import * as THREE from 'three';
+import { useWindowSize } from '../hooks/useWindowSize';
 
 function FloatingObject() {
+// ... existing code ...
   const meshRef = useRef();
   const { mouse, viewport } = useThree();
 
@@ -39,10 +41,12 @@ function FloatingObject() {
 }
 
 export default function Hero3D() {
-  const isMobile = window.innerWidth < 768;
+  const { width } = useWindowSize();
+  const isMobile = width < 768;
+  const isTablet = width >= 768 && width < 1024;
   
   return (
-    <div style={{ width: '100%', height: isMobile ? '350px' : '450px' }}>
+    <div style={{ width: '100%', height: isMobile ? '350px' : isTablet ? '400px' : '450px' }}>
       <Canvas dpr={[1, 2]} camera={{ position: [0, 0, 5], fov: 45 }}>
         <ambientLight intensity={0.5} />
         <pointLight position={[10, 10, 10]} intensity={1.5} />

@@ -1,6 +1,7 @@
-import { useRef, useState, useEffect } from 'react';
+import { useRef } from 'react';
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import { useWindowSize } from '../hooks/useWindowSize';
 
 const projects = [
   {
@@ -31,15 +32,10 @@ const projects = [
 
 export default function ProjectShowcase() {
   const targetRef = useRef(null);
-  const [windowWidth, setWindowWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 1200);
-
-  useEffect(() => {
-    const handleResize = () => setWindowWidth(window.innerWidth);
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
+  const { width: windowWidth } = useWindowSize();
 
   const isMobile = windowWidth <= 768;
+  const isTablet = windowWidth > 768 && windowWidth <= 1024;
 
   const { scrollYProgress } = useScroll({
     target: targetRef,

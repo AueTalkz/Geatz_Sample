@@ -1,5 +1,16 @@
 /* Responsive Refinements for Mobile Smoothness */
 
+@media (max-width: 1024px) {
+  .hero-grid {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  
+  .hero-btns-desktop {
+    justify-content: center;
+  }
+}
+
 @media (max-width: 768px) {
   .hero-title {
     font-size: 3.2rem !important;
@@ -40,6 +51,11 @@
   .section-title, .section-desc, h2, h3, h4 {
     text-align: center !important;
   }
+  
+  .showcase-item {
+    min-width: 100% !important;
+    padding: 0 10px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -54,6 +70,17 @@
 
   .nav-links a {
     font-size: 0.65rem !important;
+  }
+}
+
+/* Ultra-wide screens */
+@media (min-width: 2000px) {
+  .container {
+    max-width: 1800px !important;
+  }
+  
+  .hero-title {
+    font-size: 8rem !important;
   }
 }
 

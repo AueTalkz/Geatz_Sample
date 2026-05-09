@@ -3,12 +3,14 @@ import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { Float, Sphere, MeshDistortMaterial, PerspectiveCamera, Stars, Environment, ContactShadows } from '@react-three/drei';
 import * as THREE from 'three';
 import { useScroll } from 'framer-motion';
+import { useWindowSize } from '../hooks/useWindowSize';
 
 function BackgroundElements() {
   const sphereRef = useRef();
   const particlesRef = useRef();
   const { mouse, viewport } = useThree();
   const { scrollYProgress } = useScroll();
+  const { width } = useWindowSize();
   
   // Custom particles
   const particlesCount = 3000;
@@ -41,7 +43,8 @@ function BackgroundElements() {
     return [pos, col];
   }, []);
 
-  const isMobile = window.innerWidth < 768;
+  const isMobile = width < 768;
+  const isTablet = width >= 768 && width < 1024;
 
   useFrame((state) => {
     const time = state.clock.getElapsedTime();
