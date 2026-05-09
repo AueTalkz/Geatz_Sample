@@ -1,75 +1,133 @@
-import { useRef, useMemo } from 'react';
+import { useRef } from 'react';
 import { Canvas, useFrame, useThree, useLoader } from '@react-three/fiber';
-import { Float, Environment, PerspectiveCamera, Sparkles, MeshDistortMaterial } from '@react-three/drei';
+import { Float, Environment, Sparkles } from '@react-three/drei';
 import * as THREE from 'three';
 import { useWindowSize } from '../hooks/useWindowSize';
 import logo from '../assets/logo.png';
 
-function HolographicLogo() {
-  const meshRef = useRef();
-  const ringRef = useRef();
+function OrbitalLogo() {
+  const groupRef = useRef();
+  const logoRef = useRef();
+  const orbitRing1 = useRef();
+  const orbitRing2 = useRef();
+  const orbitRing3 = useRef();
+  const particle1 = useRef();
+  const particle2 = useRef();
+  const particle3 = useRef();
   const texture = useLoader(THREE.TextureLoader, logo);
-  const { mouse, viewport } = useThree();
+  const { mouse } = useThree();
 
   useFrame((state) => {
-    const time = state.clock.getElapsedTime();
-    if (meshRef.current) {
-      // Complex holographic rotation
-      meshRef.current.rotation.y = Math.sin(time * 0.5) * 0.3;
-      meshRef.current.rotation.x = Math.cos(time * 0.3) * 0.2;
-      
-      // Magnetic response
-      const targetX = (mouse.x * viewport.width) / 8;
-      const targetY = (mouse.y * viewport.height) / 8;
-      meshRef.current.position.x = THREE.MathUtils.lerp(meshRef.current.position.x, targetX, 0.05);
-      meshRef.current.position.y = THREE.MathUtils.lerp(meshRef.current.position.y, targetY, 0.05);
+    const t = state.clock.getElapsedTime();
 
-      // Glitchy scale pulse
-      const glitch = 1 + (Math.random() > 0.98 ? 0.05 : 0);
-      const pulse = 1 + Math.sin(time * 2) * 0.02;
-      meshRef.current.scale.set(pulse * glitch, pulse * glitch, pulse * glitch);
+    // Logo: gentle levitation bob
+    if (logoRef.current) {
+      logoRef.current.position.y = Math.sin(t * 0.8) * 0.15;
+      logoRef.current.rotation.z = Math.sin(t * 0.4) * 0.03;
     }
 
-    if (ringRef.current) {
-      ringRef.current.rotation.z = time * 0.5;
-      ringRef.current.rotation.x = time * 0.2;
+    // Whole group tracks the mouse softly
+    if (groupRef.current) {
+      groupRef.current.rotation.y = THREE.MathUtils.lerp(
+        groupRef.current.rotation.y, mouse.x * 0.4, 0.03
+      );
+      groupRef.current.rotation.x = THREE.MathUtils.lerp(
+        groupRef.current.rotation.x, -mouse.y * 0.2, 0.03
+      );
+    }
+
+    // Orbit rings spin at different speeds and axes
+    if (orbitRing1.current) {
+      orbitRing1.current.rotation.z = t * 0.35;
+    }
+    if (orbitRing2.current) {
+      orbitRing2.current.rotation.z = -t * 0.25;
+    }
+    if (orbitRing3.current) {
+      orbitRing3.current.rotation.z = t * 0.15;
+    }
+
+    // Orbiting particles
+    if (particle1.current) {
+      particle1.current.position.x = Math.cos(t * 0.7) * 2.8;
+      particle1.current.position.y = Math.sin(t * 0.7) * 2.8;
+      particle1.current.scale.setScalar(0.06 + Math.sin(t * 3) * 0.02);
+    }
+    if (particle2.current) {
+      particle2.current.position.x = Math.cos(-t * 0.5 + 2) * 3.2;
+      particle2.current.position.y = Math.sin(-t * 0.5 + 2) * 3.2;
+      particle2.current.scale.setScalar(0.05 + Math.sin(t * 4) * 0.02);
+    }
+    if (particle3.current) {
+      particle3.current.position.x = Math.cos(t * 0.3 + 4) * 3.6;
+      particle3.current.position.y = Math.sin(t * 0.3 + 4) * 3.6;
+      particle3.current.scale.setScalar(0.04 + Math.sin(t * 5) * 0.015);
     }
   });
 
   return (
-    <group>
-      <Float speed={5} rotationIntensity={0.5} floatIntensity={1}>
-        {/* Main Logo Plane with Bloom-like glow */}
-        <mesh ref={meshRef} scale={4}>
-          <planeGeometry args={[1.2, 1.2]} />
-          <meshBasicMaterial 
-            map={texture} 
-            transparent={true} 
-            side={THREE.DoubleSide}
-            opacity={1}
-          />
-        </mesh>
+    <group ref={groupRef}>
+      {/* Main Logo — flat, crisp, no distortion */}
+      <mesh ref={logoRef} scale={3.8}>
+        <planeGeometry args={[1.2, 1.2]} />
+        <meshBasicMaterial
+          map={texture}
+          transparent
+          side={THREE.DoubleSide}
+        />
+      </mesh>
 
-        {/* Holographic Ghosting Effect */}
-        <mesh position={[0, 0, -0.05]} scale={4.1}>
-          <planeGeometry args={[1.2, 1.2]} />
-          <meshBasicMaterial 
-            map={texture} 
-            transparent={true} 
-            opacity={0.2} 
-            color="#2563eb"
-            blending={THREE.AdditiveBlending}
-          />
-        </mesh>
+      {/* Soft blue aura behind the logo */}
+      <mesh position={[0, 0, -0.15]} scale={4.6}>
+        <circleGeometry args={[0.6, 64]} />
+        <meshBasicMaterial
+          color="#2563eb"
+          transparent
+          opacity={0.08}
+          blending={THREE.AdditiveBlending}
+        />
+      </mesh>
 
-        {/* Cybernetic Energy Ring */}
-        <mesh ref={ringRef} rotation={[Math.PI / 2, 0, 0]}>
-          <torusGeometry args={[2.5, 0.02, 16, 100]} />
-          <meshBasicMaterial color="#2563eb" transparent opacity={0.3} />
+      {/* Orbit ring 1 — inner, thin */}
+      <group ref={orbitRing1} rotation={[1.2, 0, 0]}>
+        <mesh>
+          <torusGeometry args={[2.6, 0.012, 16, 128]} />
+          <meshBasicMaterial color="#38bdf8" transparent opacity={0.35} />
         </mesh>
       </group>
 
-      <Sparkles count={50} scale={6} size={2} speed={0.4} color="#2563eb" />
+      {/* Orbit ring 2 — mid, tilted differently */}
+      <group ref={orbitRing2} rotation={[0.6, 0.8, 0]}>
+        <mesh>
+          <torusGeometry args={[3.0, 0.008, 16, 128]} />
+          <meshBasicMaterial color="#818cf8" transparent opacity={0.25} />
+        </mesh>
+      </group>
+
+      {/* Orbit ring 3 — outer, wide tilt */}
+      <group ref={orbitRing3} rotation={[1.8, 0.4, 0]}>
+        <mesh>
+          <torusGeometry args={[3.4, 0.006, 16, 128]} />
+          <meshBasicMaterial color="#2563eb" transparent opacity={0.15} />
+        </mesh>
+      </group>
+
+      {/* Orbiting energy dots */}
+      <mesh ref={particle1}>
+        <sphereGeometry args={[1, 16, 16]} />
+        <meshBasicMaterial color="#38bdf8" />
+      </mesh>
+      <mesh ref={particle2}>
+        <sphereGeometry args={[1, 16, 16]} />
+        <meshBasicMaterial color="#818cf8" />
+      </mesh>
+      <mesh ref={particle3}>
+        <sphereGeometry args={[1, 16, 16]} />
+        <meshBasicMaterial color="#2563eb" />
+      </mesh>
+
+      {/* Ambient particle field */}
+      <Sparkles count={40} scale={8} size={1.5} speed={0.3} color="#38bdf8" />
     </group>
   );
 }
@@ -78,14 +136,15 @@ export default function Hero3D() {
   const { width } = useWindowSize();
   const isMobile = width < 768;
   const isTablet = width >= 768 && width < 1024;
-  
+
   return (
-    <div style={{ width: '100%', height: isMobile ? '350px' : isTablet ? '400px' : '550px', cursor: 'crosshair' }}>
-      <Canvas dpr={[1, 2]} camera={{ position: [0, 0, 7], fov: 40 }}>
-        <ambientLight intensity={1} />
-        <pointLight position={[10, 10, 10]} intensity={1} />
+    <div style={{ width: '100%', height: isMobile ? '350px' : isTablet ? '400px' : '550px' }}>
+      <Canvas dpr={[1, 2]} camera={{ position: [0, 0, 8], fov: 38 }}>
+        <ambientLight intensity={0.6} />
+        <pointLight position={[5, 5, 5]} intensity={0.8} color="#38bdf8" />
+        <pointLight position={[-5, -3, 5]} intensity={0.4} color="#818cf8" />
         <Environment preset="night" />
-        <HolographicLogo />
+        <OrbitalLogo />
       </Canvas>
     </div>
   );
