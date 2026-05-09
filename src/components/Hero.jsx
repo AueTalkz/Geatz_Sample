@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import Magnetic from './Magnetic';
-import Hero3D from './Hero3D';
+import logo from '../assets/logo.png';
 
 export default function Hero() {
   const containerVars = {
@@ -64,12 +64,40 @@ export default function Hero() {
         </motion.div>
 
         <motion.div 
-          className="hero-lottie"
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1, delay: 0.5 }}
+          className="hero-logo-container"
+          initial={{ opacity: 0, scale: 0.8, rotate: -10 }}
+          animate={{ opacity: 1, scale: 1, rotate: 0 }}
+          transition={{ 
+            duration: 1.2, 
+            delay: 0.5,
+            ease: [0.16, 1, 0.3, 1]
+          }}
+          style={{ 
+            display: 'flex', 
+            justifyContent: 'center', 
+            alignItems: 'center',
+            perspective: '1000px'
+          }}
         >
-          <Hero3D />
+          <motion.img 
+            src={logo} 
+            alt="GGz Logo" 
+            style={{ 
+              width: '100%', 
+              maxWidth: '500px', 
+              height: 'auto',
+              filter: 'drop-shadow(0 0 30px rgba(37, 99, 235, 0.3))'
+            }}
+            animate={{ 
+              y: [0, -20, 0],
+              rotateY: [0, 10, 0]
+            }}
+            transition={{ 
+              duration: 6, 
+              repeat: Infinity, 
+              ease: "easeInOut" 
+          }}
+          />
         </motion.div>
       </div>
 
