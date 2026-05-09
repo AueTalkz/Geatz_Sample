@@ -1,7 +1,6 @@
 import { motion } from 'framer-motion';
-import Lottie from 'lottie-react';
 import Magnetic from './Magnetic';
-import worldAnimation from '../assets/world_animation.json';
+import Hero3D from './Hero3D';
 
 export default function Hero() {
   const containerVars = {
@@ -70,7 +69,7 @@ export default function Hero() {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1, delay: 0.5 }}
         >
-          <div style={{ height: '300px', background: 'radial-gradient(circle, var(--brand-blue) 0%, transparent 70%)', opacity: 0.15 }}></div>
+          <Hero3D />
         </motion.div>
       </div>
 

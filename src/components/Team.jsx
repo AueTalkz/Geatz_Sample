@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import TiltCard from './TiltCard';
 
 export default function Team() {
   const teamMembers = [
@@ -74,27 +75,27 @@ export default function Team() {
         >
           {teamMembers.map((member, index) => (
             <motion.div 
-              className="glass-card white-glow" 
               key={index} 
-              style={{ textAlign: 'center' }}
               variants={itemVars}
-              whileHover={{ scale: 1.05, translateY: -10 }}
             >
-              <motion.div 
-                className="member-avatar" 
-                style={{ 
-                  background: `linear-gradient(135deg, ${member.color}44, ${member.color}22)`,
-                  border: `1px solid ${member.color}44`
-                }}
-                whileHover={{ rotate: 10, scale: 1.1 }}
-              >
-                {member.name.charAt(0)}
-              </motion.div>
-              <h3 style={{ marginBottom: '10px' }}>{member.name}</h3>
-              <div style={{ color: member.color, fontSize: '0.9rem', fontWeight: 700, marginBottom: '20px', textTransform: 'uppercase', letterSpacing: '1px' }}>
-                {member.role}
-              </div>
-              <p style={{ color: 'var(--text-secondary)', fontSize: '1rem' }}>{member.bio}</p>
+              <TiltCard className="glass-card white-glow" style={{ textAlign: 'center', height: '100%' }}>
+                <motion.div 
+                  className="member-avatar" 
+                  style={{ 
+                    background: `linear-gradient(135deg, ${member.color}44, ${member.color}22)`,
+                    border: `1px solid ${member.color}44`,
+                    margin: '0 auto 30px'
+                  }}
+                  whileHover={{ rotate: 10, scale: 1.1 }}
+                >
+                  {member.name.charAt(0)}
+                </motion.div>
+                <h3 style={{ marginBottom: '10px' }}>{member.name}</h3>
+                <div style={{ color: member.color, fontSize: '0.9rem', fontWeight: 700, marginBottom: '20px', textTransform: 'uppercase', letterSpacing: '1px' }}>
+                  {member.role}
+                </div>
+                <p style={{ color: 'var(--text-secondary)', fontSize: '1rem' }}>{member.bio}</p>
+              </TiltCard>
             </motion.div>
           ))}
         </motion.div>

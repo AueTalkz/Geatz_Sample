@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import Seo from './Seo';
+import Globe3D from './Globe3D';
 
 export default function GEz() {
   return (
@@ -11,6 +12,7 @@ export default function GEz() {
       />
       <div className="container">
         <div className="division-header reveal-up">
+          <Globe3D color="#db2777" />
           <h2 className="section-title">
             Geatz <span className="gradient-text-pink">Entertainmentz</span>
           </h2>

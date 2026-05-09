@@ -16,17 +16,15 @@ import ScrollToTop from './components/ScrollToTop';
 import ScrollProgress from './components/ScrollProgress';
 import BackToTop from './components/BackToTop';
 
+import Scene3D from './components/Scene3D';
+
 function App() {
   return (
     <SmoothScroll>
       <ScrollToTop />
       <ScrollProgress />
-      <div className="bg-mesh">
-        <div className="bg-orb orb-purple"></div>
-        <div className="bg-orb orb-blue"></div>
-        <div className="bg-orb orb-pink"></div>
-        <div className="noise-overlay"></div>
-      </div>
+      <Scene3D />
+      <div className="noise-overlay"></div>
       
       <CustomCursor />
       <BackToTop />
