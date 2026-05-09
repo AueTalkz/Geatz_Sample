@@ -96,7 +96,7 @@ export default function Navbar() {
           </li>
           <li>
             <Magnetic>
-              <a href="#team" onClick={(e) => handleLinkClick(e, '#team')}>Team</a>
+              <Link to="/team">Team</Link>
             </Magnetic>
           </li>
           <li>

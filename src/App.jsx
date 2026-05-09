@@ -12,6 +12,7 @@ import GEzPage from './pages/GEzPage';
 import Projects from './pages/Projects';
 import ProjectDetail from './pages/ProjectDetail';
 import StartProjectPage from './pages/StartProjectPage';
+import TeamPage from './pages/TeamPage';
 import NotFound from './pages/NotFound';
 import ScrollToTop from './components/ScrollToTop';
 import ScrollProgress from './components/ScrollProgress';
@@ -53,6 +54,7 @@ function App() {
           <Route path="/projects" element={<PageTransition><Projects /></PageTransition>} />
           <Route path="/project/:id" element={<PageTransition><ProjectDetail /></PageTransition>} />
           <Route path="/start-a-project" element={<PageTransition><StartProjectPage /></PageTransition>} />
+          <Route path="/team" element={<PageTransition><TeamPage /></PageTransition>} />
           <Route path="*" element={<PageTransition><NotFound /></PageTransition>} />
         </Routes>
       </AnimatePresence>

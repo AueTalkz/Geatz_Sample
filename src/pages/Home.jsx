@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import Hero from '../components/Hero';
-import Team from '../components/Team';
 import Contact from '../components/Contact';
 import Magnetic from '../components/Magnetic';
 import Testimonials from '../components/Testimonials';
@@ -106,7 +105,6 @@ export default function Home() {
         </div>
       </section>
 
-      <Team />
       <ProjectShowcase />
       <Testimonials />
       <Contact />
