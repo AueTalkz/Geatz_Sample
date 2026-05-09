@@ -1,70 +1,76 @@
-import { useRef } from 'react';
+import { useRef, useMemo } from 'react';
 import { Canvas, useFrame, useThree, useLoader } from '@react-three/fiber';
-import { Float, Environment, MeshPhysicalMaterial, Sphere, Decal } from '@react-three/drei';
+import { Float, Environment, PerspectiveCamera, Sparkles, MeshDistortMaterial } from '@react-three/drei';
 import * as THREE from 'three';
 import { useWindowSize } from '../hooks/useWindowSize';
 import logo from '../assets/logo.png';
 
-function LogoBubble() {
+function HolographicLogo() {
   const meshRef = useRef();
+  const ringRef = useRef();
   const texture = useLoader(THREE.TextureLoader, logo);
   const { mouse, viewport } = useThree();
 
   useFrame((state) => {
     const time = state.clock.getElapsedTime();
     if (meshRef.current) {
-      // Smooth continuous rotation
-      meshRef.current.rotation.y = time * 0.2;
+      // Complex holographic rotation
+      meshRef.current.rotation.y = Math.sin(time * 0.5) * 0.3;
+      meshRef.current.rotation.x = Math.cos(time * 0.3) * 0.2;
       
-      // Magnetic tilt towards mouse
-      const tiltX = (mouse.y * Math.PI) / 6; // Up to 30 degrees
-      const tiltY = (mouse.x * Math.PI) / 6;
-      
-      meshRef.current.rotation.x = THREE.MathUtils.lerp(meshRef.current.rotation.x, -tiltX, 0.1);
-      meshRef.current.rotation.z = THREE.MathUtils.lerp(meshRef.current.rotation.z, -tiltY * 0.5, 0.1);
-
-      // Breathing pulse effect
-      const pulse = 1 + Math.sin(time * 1.5) * 0.05;
-      meshRef.current.scale.set(pulse, pulse, pulse);
-      
-      // Dynamic parallax
-      const targetX = (mouse.x * viewport.width) / 10;
-      const targetY = (mouse.y * viewport.height) / 10;
+      // Magnetic response
+      const targetX = (mouse.x * viewport.width) / 8;
+      const targetY = (mouse.y * viewport.height) / 8;
       meshRef.current.position.x = THREE.MathUtils.lerp(meshRef.current.position.x, targetX, 0.05);
       meshRef.current.position.y = THREE.MathUtils.lerp(meshRef.current.position.y, targetY, 0.05);
+
+      // Glitchy scale pulse
+      const glitch = 1 + (Math.random() > 0.98 ? 0.05 : 0);
+      const pulse = 1 + Math.sin(time * 2) * 0.02;
+      meshRef.current.scale.set(pulse * glitch, pulse * glitch, pulse * glitch);
+    }
+
+    if (ringRef.current) {
+      ringRef.current.rotation.z = time * 0.5;
+      ringRef.current.rotation.x = time * 0.2;
     }
   });
 
   return (
-    <Float speed={4} rotationIntensity={0.2} floatIntensity={0.5}>
-      <mesh ref={meshRef}>
-        {/* The Glass Bubble */}
-        <Sphere args={[1.8, 64, 64]}>
-          <meshPhysicalMaterial
-            roughness={0}
-            transmission={1}
-            thickness={1}
-            envMapIntensity={2}
-            clearcoat={1}
-            clearcoatRoughness={0}
-            color="#ffffff"
-            attenuationColor="#2563eb"
-            attenuationDistance={0.5}
+    <group>
+      <Float speed={5} rotationIntensity={0.5} floatIntensity={1}>
+        {/* Main Logo Plane with Bloom-like glow */}
+        <mesh ref={meshRef} scale={4}>
+          <planeGeometry args={[1.2, 1.2]} />
+          <meshBasicMaterial 
+            map={texture} 
+            transparent={true} 
+            side={THREE.DoubleSide}
+            opacity={1}
           />
-        </Sphere>
+        </mesh>
 
-        {/* The Logo with high-quality mapping */}
-        <Sphere args={[1.82, 64, 64]}>
-          <meshBasicMaterial transparent opacity={0} />
-          <Decal
-            position={[0, 0, 0]}
-            rotation={[0, 0, 0]}
-            scale={[3, 3, 3]}
-            map={texture}
+        {/* Holographic Ghosting Effect */}
+        <mesh position={[0, 0, -0.05]} scale={4.1}>
+          <planeGeometry args={[1.2, 1.2]} />
+          <meshBasicMaterial 
+            map={texture} 
+            transparent={true} 
+            opacity={0.2} 
+            color="#2563eb"
+            blending={THREE.AdditiveBlending}
           />
-        </Sphere>
-      </mesh>
-    </Float>
+        </mesh>
+
+        {/* Cybernetic Energy Ring */}
+        <mesh ref={ringRef} rotation={[Math.PI / 2, 0, 0]}>
+          <torusGeometry args={[2.5, 0.02, 16, 100]} />
+          <meshBasicMaterial color="#2563eb" transparent opacity={0.3} />
+        </mesh>
+      </group>
+
+      <Sparkles count={50} scale={6} size={2} speed={0.4} color="#2563eb" />
+    </group>
   );
 }
 
@@ -74,13 +80,12 @@ export default function Hero3D() {
   const isTablet = width >= 768 && width < 1024;
   
   return (
-    <div style={{ width: '100%', height: isMobile ? '350px' : isTablet ? '400px' : '500px', cursor: 'grab' }}>
-      <Canvas dpr={[1, 2]} camera={{ position: [0, 0, 6], fov: 45 }}>
-        <ambientLight intensity={0.5} />
+    <div style={{ width: '100%', height: isMobile ? '350px' : isTablet ? '400px' : '550px', cursor: 'crosshair' }}>
+      <Canvas dpr={[1, 2]} camera={{ position: [0, 0, 7], fov: 40 }}>
+        <ambientLight intensity={1} />
         <pointLight position={[10, 10, 10]} intensity={1} />
-        <spotLight position={[-10, 10, 10]} angle={0.15} penumbra={1} intensity={1} color="#2563eb" />
-        <Environment preset="city" />
-        <LogoBubble />
+        <Environment preset="night" />
+        <HolographicLogo />
       </Canvas>
     </div>
   );
