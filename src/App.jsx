@@ -1,4 +1,5 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom';
+import { AnimatePresence, motion } from 'framer-motion';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import CustomCursor from './components/CustomCursor';
@@ -18,7 +19,20 @@ import BackToTop from './components/BackToTop';
 
 import Scene3D from './components/Scene3D';
 
+const PageTransition = ({ children }) => (
+  <motion.div
+    initial={{ opacity: 0, x: 20 }}
+    animate={{ opacity: 1, x: 0 }}
+    exit={{ opacity: 0, x: -20 }}
+    transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+  >
+    {children}
+  </motion.div>
+);
+
 function App() {
+  const location = useLocation();
+
   return (
     <SmoothScroll>
       <ScrollToTop />
@@ -31,15 +45,17 @@ function App() {
       
       <Navbar />
       
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/gdz" element={<GDzPage />} />
-        <Route path="/gez" element={<GEzPage />} />
-        <Route path="/projects" element={<Projects />} />
-        <Route path="/project/:id" element={<ProjectDetail />} />
-        <Route path="/start-a-project" element={<StartProjectPage />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
+      <AnimatePresence mode="wait">
+        <Routes location={location} key={location.pathname}>
+          <Route path="/" element={<PageTransition><Home /></PageTransition>} />
+          <Route path="/gdz" element={<PageTransition><GDzPage /></PageTransition>} />
+          <Route path="/gez" element={<PageTransition><GEzPage /></PageTransition>} />
+          <Route path="/projects" element={<PageTransition><Projects /></PageTransition>} />
+          <Route path="/project/:id" element={<PageTransition><ProjectDetail /></PageTransition>} />
+          <Route path="/start-a-project" element={<PageTransition><StartProjectPage /></PageTransition>} />
+          <Route path="*" element={<PageTransition><NotFound /></PageTransition>} />
+        </Routes>
+      </AnimatePresence>
 
       <Footer />
     </SmoothScroll>

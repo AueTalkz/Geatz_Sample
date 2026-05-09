@@ -55,14 +55,18 @@ function BackgroundElements() {
       sphereRef.current.rotation.x = time * 0.1 + scroll * 2;
       sphereRef.current.rotation.y = time * 0.15 + scroll * 3;
       
-      // Move sphere towards mouse slightly
+      // Move sphere to avoid overlapping text on mobile
       const targetX = (mouse.x * viewport.width) / 4;
-      const targetY = (mouse.y * viewport.height) / 4 - scroll * (isMobile ? 5 : 10);
-      sphereRef.current.position.x = THREE.MathUtils.lerp(sphereRef.current.position.x, (isMobile ? 1 : 4) + targetX, 0.05);
+      const targetY = (mouse.y * viewport.height) / 4 - scroll * (isMobile ? 15 : 10);
+      
+      // On mobile, keep it more to the side and smaller
+      const xPos = isMobile ? -2 + targetX : 4 + targetX;
+      sphereRef.current.position.x = THREE.MathUtils.lerp(sphereRef.current.position.x, xPos, 0.05);
       sphereRef.current.position.y = THREE.MathUtils.lerp(sphereRef.current.position.y, targetY, 0.05);
       
-      // Scale based on scroll
-      const s = 1 + scroll * 0.5;
+      // Scale based on scroll, but smaller on mobile
+      const baseScale = isMobile ? 0.6 : 1;
+      const s = baseScale * (1 + scroll * 0.3);
       sphereRef.current.scale.set(s, s, s);
     }
     
@@ -73,7 +77,7 @@ function BackgroundElements() {
       
       // Follow mouse
       particlesRef.current.position.x = THREE.MathUtils.lerp(particlesRef.current.position.x, mouse.x * 2, 0.05);
-      particlesRef.current.position.y = THREE.MathUtils.lerp(particlesRef.current.position.y, mouse.y * 2 - scroll * 5, 0.05);
+      particlesRef.current.position.y = THREE.MathUtils.lerp(particlesRef.current.position.y, mouse.y * 2 - scroll * 10, 0.05);
     }
   });
 
@@ -84,7 +88,7 @@ function BackgroundElements() {
       <pointLight position={[-20, -20, -20]} intensity={1} color="#db2777" />
       <spotLight position={[0, 10, 0]} angle={0.3} penumbra={1} intensity={2} color="#06b6d4" />
 
-      <Stars radius={100} depth={50} count={isMobile ? 3000 : 7000} factor={6} saturation={0.5} fade speed={1.5} />
+      <Stars radius={100} depth={50} count={isMobile ? 2000 : 7000} factor={6} saturation={0.5} fade speed={1.5} />
       
       <Environment preset="city" />
 
@@ -104,7 +108,7 @@ function BackgroundElements() {
           />
         </bufferGeometry>
         <pointsMaterial
-          size={isMobile ? 0.12 : 0.08}
+          size={isMobile ? 0.1 : 0.08}
           vertexColors
           transparent
           opacity={0.4}
@@ -114,7 +118,7 @@ function BackgroundElements() {
       </points>
 
       <Float speed={2} rotationIntensity={0.5} floatIntensity={0.5}>
-        <Sphere ref={sphereRef} args={[1.5, 100, 100]} position={[isMobile ? 0 : 5, 0, -8]}>
+        <Sphere ref={sphereRef} args={[1.5, 100, 100]} position={[isMobile ? -2 : 5, 0, -10]}>
           <MeshDistortMaterial
             color="#2563eb"
             attach="material"
