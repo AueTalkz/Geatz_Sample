@@ -14,7 +14,7 @@ export default function TiltCard({ children, className, ...props }) {
   const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-10deg", "10deg"]);
 
   const handleMouseMove = (e) => {
-    if (!ref.current) return;
+    if (!ref.current || window.innerWidth < 768) return;
     
     const rect = ref.current.getBoundingClientRect();
     const width = rect.width;

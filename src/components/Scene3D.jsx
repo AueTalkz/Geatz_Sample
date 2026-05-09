@@ -41,6 +41,8 @@ function BackgroundElements() {
     return [pos, col];
   }, []);
 
+  const isMobile = window.innerWidth < 768;
+
   useFrame((state) => {
     const time = state.clock.getElapsedTime();
     const scroll = scrollYProgress.get();
@@ -52,9 +54,13 @@ function BackgroundElements() {
       
       // Move sphere towards mouse slightly
       const targetX = (mouse.x * viewport.width) / 4;
-      const targetY = (mouse.y * viewport.height) / 4 - scroll * 10;
-      sphereRef.current.position.x = THREE.MathUtils.lerp(sphereRef.current.position.x, 4 + targetX, 0.05);
+      const targetY = (mouse.y * viewport.height) / 4 - scroll * (isMobile ? 5 : 10);
+      sphereRef.current.position.x = THREE.MathUtils.lerp(sphereRef.current.position.x, (isMobile ? 1 : 4) + targetX, 0.05);
       sphereRef.current.position.y = THREE.MathUtils.lerp(sphereRef.current.position.y, targetY, 0.05);
+      
+      // Scale based on scroll
+      const s = 1 + scroll * 0.5;
+      sphereRef.current.scale.set(s, s, s);
     }
     
     // Rotate and sway particles
@@ -75,7 +81,7 @@ function BackgroundElements() {
       <pointLight position={[-20, -20, -20]} intensity={1} color="#db2777" />
       <spotLight position={[0, 10, 0]} angle={0.3} penumbra={1} intensity={2} color="#06b6d4" />
 
-      <Stars radius={100} depth={50} count={7000} factor={6} saturation={0.5} fade speed={1.5} />
+      <Stars radius={100} depth={50} count={isMobile ? 3000 : 7000} factor={6} saturation={0.5} fade speed={1.5} />
       
       <Environment preset="city" />
 
@@ -95,7 +101,7 @@ function BackgroundElements() {
           />
         </bufferGeometry>
         <pointsMaterial
-          size={0.08}
+          size={isMobile ? 0.12 : 0.08}
           vertexColors
           transparent
           opacity={0.4}
@@ -105,7 +111,7 @@ function BackgroundElements() {
       </points>
 
       <Float speed={2} rotationIntensity={0.5} floatIntensity={0.5}>
-        <Sphere ref={sphereRef} args={[1.5, 100, 100]} position={[5, 0, -8]}>
+        <Sphere ref={sphereRef} args={[1.5, 100, 100]} position={[isMobile ? 0 : 5, 0, -8]}>
           <MeshDistortMaterial
             color="#2563eb"
             attach="material"
@@ -119,19 +125,21 @@ function BackgroundElements() {
         </Sphere>
       </Float>
 
-      <Float speed={3} rotationIntensity={1} floatIntensity={1}>
-        <Sphere args={[0.8, 64, 64]} position={[-6, 3, -12]}>
-          <MeshDistortMaterial
-            color="#db2777"
-            attach="material"
-            distort={0.6}
-            speed={4}
-            roughness={0.1}
-            metalness={0.8}
-            clearcoat={1}
-          />
-        </Sphere>
-      </Float>
+      {!isMobile && (
+        <Float speed={3} rotationIntensity={1} floatIntensity={1}>
+          <Sphere args={[0.8, 64, 64]} position={[-6, 3, -12]}>
+            <MeshDistortMaterial
+              color="#db2777"
+              attach="material"
+              distort={0.6}
+              speed={4}
+              roughness={0.1}
+              metalness={0.8}
+              clearcoat={1}
+            />
+          </Sphere>
+        </Float>
+      )}
       
       <ContactShadows 
         position={[0, -10, 0]} 

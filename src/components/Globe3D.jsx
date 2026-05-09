@@ -41,9 +41,12 @@ function Globe({ color = "#2563eb" }) {
   );
 }
 
-export default function Globe3D({ color, height = "300px" }) {
+export default function Globe3D({ color, height }) {
+  const isMobile = window.innerWidth < 768;
+  const finalHeight = height || (isMobile ? '250px' : '300px');
+  
   return (
-    <div style={{ width: '100%', height }}>
+    <div style={{ width: '100%', height: finalHeight }}>
       <Canvas dpr={[1, 2]} camera={{ position: [0, 0, 5], fov: 45 }}>
         <ambientLight intensity={0.5} />
         <pointLight position={[10, 10, 10]} intensity={1.5} />

@@ -39,8 +39,10 @@ function FloatingObject() {
 }
 
 export default function Hero3D() {
+  const isMobile = window.innerWidth < 768;
+  
   return (
-    <div style={{ width: '100%', height: '450px' }}>
+    <div style={{ width: '100%', height: isMobile ? '350px' : '450px' }}>
       <Canvas dpr={[1, 2]} camera={{ position: [0, 0, 5], fov: 45 }}>
         <ambientLight intensity={0.5} />
         <pointLight position={[10, 10, 10]} intensity={1.5} />
