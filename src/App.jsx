@@ -25,7 +25,36 @@ const PricingPage = lazy(() => import('./pages/PricingPage'));
 const BlogPage = lazy(() => import('./pages/BlogPage'));
 const BlogPostPage = lazy(() => import('./pages/BlogPostPage'));
 const CareersPage = lazy(() => import('./pages/CareersPage'));
+const AdminPage = lazy(() => import('./pages/AdminPage'));
+const ClientPortal = lazy(() => import('./pages/ClientPortal'));
 const NotFound = lazy(() => import('./pages/NotFound'));
+
+// Protected Route Component
+const ProtectedRoute = ({ children }) => {
+  const [loading, setLoading] = useState(true);
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const checkAuth = async () => {
+      const { auth } = await import('./firebase');
+      const { onAuthStateChanged } = await import('firebase/auth');
+      onAuthStateChanged(auth, (u) => {
+        setUser(u);
+        setLoading(false);
+      });
+    };
+    checkAuth();
+  }, []);
+
+  if (loading) return <div style={{ height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>Loading Auth...</div>;
+  if (!user) return <div style={{ height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column' }}>
+    <h2>Admin Access Required</h2>
+    <p>Please login to continue.</p>
+    <a href="/admin/login" className="btn btn-primary" style={{ marginTop: '20px' }}>Login</a>
+  </div>;
+
+  return children;
+};
 
 // Skeleton loader for Suspense fallback
 const PageLoader = () => (
@@ -115,6 +144,10 @@ function App() {
               <Route path="/blog" element={<PageTransition><BlogPage /></PageTransition>} />
               <Route path="/blog/:slug" element={<PageTransition><BlogPostPage /></PageTransition>} />
               <Route path="/careers" element={<PageTransition><CareersPage /></PageTransition>} />
+              <Route path="/admin/*" element={<ProtectedRoute><AdminPage /></ProtectedRoute>} />
+              <Route path="/admin/login" element={<PageTransition><AdminPage loginOnly /></PageTransition>} />
+              <Route path="/portal/*" element={<PageTransition><ClientPortal /></PageTransition>} />
+              <Route path="/portal/login" element={<PageTransition><ClientPortal loginOnly /></PageTransition>} />
               <Route path="*" element={<PageTransition><NotFound /></PageTransition>} />
             </Routes>
           </AnimatePresence>
