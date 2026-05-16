@@ -1,31 +1,75 @@
 import { Helmet } from 'react-helmet-async';
 
-export default function SEO({ title, description, keywords, image, url }) {
-  const siteName = 'Geatz Groupz';
-  const fullTitle = title ? `${title} | ${siteName}` : siteName;
-  const defaultDesc = 'Geatz Groupz: Home to Geatz Devolperz (GDz) and Geatz Entertainmentz (GEz). Premium web development, UI/UX design, and professional content creation.';
-  const siteUrl = 'https://geatzgroupz.com';
+export default function Seo({ 
+  title = 'Geatz Groupz — Premium Development & Media', 
+  description = 'Empowering brands through high-performance development and cinematic media creation. Geatz Groupz combines GDz (development) and GEz (entertainment) under one roof.',
+  keywords = 'web development, media production, UI/UX design, content creation, Geatz Groupz, GDz, GEz',
+  image = '/favicon.png',
+  url = '',
+  type = 'website'
+}) {
+  const siteUrl = 'https://geatzgroupz.vercel.app';
+  const fullUrl = `${siteUrl}${url}`;
+  const fullImage = image.startsWith('http') ? image : `${siteUrl}${image}`;
+
+  // JSON-LD structured data
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Geatz Groupz",
+    "url": siteUrl,
+    "logo": `${siteUrl}/favicon.png`,
+    "description": description,
+    "sameAs": [
+      "https://www.linkedin.com/company/geatz-groupz/",
+      "https://www.instagram.com/geatz_groupz/"
+    ],
+    "department": [
+      {
+        "@type": "Organization",
+        "name": "Geatz Developerz (GDz)",
+        "description": "Premium web development, UI/UX design, and full-stack engineering."
+      },
+      {
+        "@type": "Organization",
+        "name": "Geatz Entertainmentz (GEz)",
+        "description": "Content creation, media production, and cinematic storytelling."
+      }
+    ]
+  };
 
   return (
     <Helmet>
-      {/* Basic Meta Tags */}
-      <title>{fullTitle}</title>
-      <meta name="description" content={description || defaultDesc} />
-      {keywords && <meta name="keywords" content={keywords} />}
+      {/* Primary Meta Tags */}
+      <title>{title}</title>
+      <meta name="title" content={title} />
+      <meta name="description" content={description} />
+      <meta name="keywords" content={keywords} />
 
       {/* Open Graph / Facebook */}
-      <meta property="og:type" content="website" />
-      <meta property="og:url" content={url || siteUrl} />
-      <meta property="og:title" content={fullTitle} />
-      <meta property="og:description" content={description || defaultDesc} />
-      {image && <meta property="og:image" content={image} />}
+      <meta property="og:type" content={type} />
+      <meta property="og:url" content={fullUrl} />
+      <meta property="og:title" content={title} />
+      <meta property="og:description" content={description} />
+      <meta property="og:image" content={fullImage} />
+      <meta property="og:site_name" content="Geatz Groupz" />
 
       {/* Twitter */}
       <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:url" content={url || siteUrl} />
-      <meta name="twitter:title" content={fullTitle} />
-      <meta name="twitter:description" content={description || defaultDesc} />
-      {image && <meta name="twitter:image" content={image} />}
+      <meta name="twitter:url" content={fullUrl} />
+      <meta name="twitter:title" content={title} />
+      <meta name="twitter:description" content={description} />
+      <meta name="twitter:image" content={fullImage} />
+
+      {/* Additional SEO */}
+      <meta name="robots" content="index, follow" />
+      <meta name="language" content="English" />
+      <link rel="canonical" href={fullUrl} />
+
+      {/* JSON-LD Structured Data */}
+      <script type="application/ld+json">
+        {JSON.stringify(structuredData)}
+      </script>
     </Helmet>
   );
 }
