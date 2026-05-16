@@ -80,6 +80,7 @@ export default function Navbar() {
     { to: '/projects', label: 'Projects', type: 'link' },
     { to: '/team', label: 'Team', type: 'link' },
     { to: '/pricing', label: 'Pricing', type: 'link' },
+    { to: '/blog', label: 'Insights', type: 'link' },
     { href: '#contact', label: 'Contact', type: 'anchor' },
   ];
 

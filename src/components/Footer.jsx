@@ -14,6 +14,7 @@ export default function Footer() {
       { label: 'Our Projects', to: '/projects' },
       { label: 'Team GGz', to: '/team' },
       { label: 'Pricing & Tiers', to: '/pricing' },
+      { label: 'Careers', to: '/careers' },
       { label: 'Start a Project', to: '/start-a-project' },
     ],
     support: [

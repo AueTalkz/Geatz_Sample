@@ -22,6 +22,9 @@ const ProjectDetail = lazy(() => import('./pages/ProjectDetail'));
 const StartProjectPage = lazy(() => import('./pages/StartProjectPage'));
 const TeamPage = lazy(() => import('./pages/TeamPage'));
 const PricingPage = lazy(() => import('./pages/PricingPage'));
+const BlogPage = lazy(() => import('./pages/BlogPage'));
+const BlogPostPage = lazy(() => import('./pages/BlogPostPage'));
+const CareersPage = lazy(() => import('./pages/CareersPage'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 
 // Skeleton loader for Suspense fallback
@@ -109,6 +112,9 @@ function App() {
               <Route path="/start-a-project" element={<PageTransition><StartProjectPage /></PageTransition>} />
               <Route path="/team" element={<PageTransition><TeamPage /></PageTransition>} />
               <Route path="/pricing" element={<PageTransition><PricingPage /></PageTransition>} />
+              <Route path="/blog" element={<PageTransition><BlogPage /></PageTransition>} />
+              <Route path="/blog/:slug" element={<PageTransition><BlogPostPage /></PageTransition>} />
+              <Route path="/careers" element={<PageTransition><CareersPage /></PageTransition>} />
               <Route path="*" element={<PageTransition><NotFound /></PageTransition>} />
             </Routes>
           </AnimatePresence>
