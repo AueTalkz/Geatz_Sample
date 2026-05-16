@@ -3,30 +3,39 @@ import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { useWindowSize } from '../hooks/useWindowSize';
 
+import ecommerceImg from '../assets/projects/ecommerce.png';
+import brandImg from '../assets/projects/brand.png';
+import saasImg from '../assets/projects/saas.png';
+import promoImg from '../assets/projects/promo.png';
+
 const projects = [
   {
     id: 'e-commerce-redesign',
     title: 'E-Commerce Redesign',
     category: 'GDz (Development)',
     imageColor: '#06b6d4',
+    image: ecommerceImg
   },
   {
     id: 'brand-identity-launch',
     title: 'Brand Identity Launch',
     category: 'GEz (Media)',
     imageColor: '#db2777',
+    image: brandImg
   },
   {
     id: 'saas-dashboard',
     title: 'SaaS Dashboard',
     category: 'GDz (Development)',
     imageColor: '#2563eb',
+    image: saasImg
   },
   {
     id: 'cinematic-promo-video',
     title: 'Cinematic Promo Video',
     category: 'GEz (Media)',
     imageColor: '#9333ea',
+    image: promoImg
   },
 ];
 
@@ -70,7 +79,12 @@ export default function ProjectShowcase() {
                   <motion.div 
                     className="showcase-image glass-card"
                     whileTap={{ scale: 0.98 }}
-                    style={{ background: `linear-gradient(135deg, ${project.imageColor}44, ${project.imageColor}22)`, height: '350px' }}
+                    style={{ 
+                      backgroundImage: `linear-gradient(135deg, ${project.imageColor}dd, ${project.imageColor}44), url(${project.image})`,
+                      backgroundSize: 'cover',
+                      backgroundPosition: 'center',
+                      height: '350px' 
+                    }}
                   >
                     <div className="showcase-tag" style={{ color: project.imageColor, textShadow: `0 0 10px ${project.imageColor}44` }}>
                       {project.category.toUpperCase()}
@@ -133,7 +147,11 @@ export default function ProjectShowcase() {
               <Link to={`/project/${project.id}`} className="showcase-link">
                 <div 
                   className="showcase-image glass-card"
-                  style={{ background: `linear-gradient(135deg, ${project.imageColor}44, ${project.imageColor}22)` }}
+                  style={{ 
+                    backgroundImage: `linear-gradient(135deg, ${project.imageColor}dd, ${project.imageColor}44), url(${project.image})`,
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                  }}
                 >
                   <div className="showcase-tag" style={{ color: project.imageColor, textShadow: `0 0 10px ${project.imageColor}44` }}>
                     {project.category.toUpperCase()}

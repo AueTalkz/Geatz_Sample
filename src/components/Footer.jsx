@@ -7,14 +7,43 @@ export default function Footer() {
 
   const footerLinks = {
     divisions: [
-      { label: 'Geatz Developerz', to: '/gdz' },
-      { label: 'Geatz Entertainmentz', to: '/gez' },
+      { label: 'GDz Engineering', to: '/gdz' },
+      { label: 'GEz Media', to: '/gez' },
     ],
     company: [
-      { label: 'Projects', to: '/projects' },
-      { label: 'Team', to: '/team' },
+      { label: 'Our Projects', to: '/projects' },
+      { label: 'Team GGz', to: '/team' },
+      { label: 'Pricing & Tiers', to: '/pricing' },
       { label: 'Start a Project', to: '/start-a-project' },
     ],
+    support: [
+      { label: 'FAQ', to: '/pricing' }, // FAQs are embedded in pricing
+      { label: 'Sitemap', to: '/sitemap.xml', external: true },
+      { label: 'Privacy Policy', to: '#' },
+    ]
+  };
+
+  const handleNewsletterSubmit = async (e) => {
+    e.preventDefault();
+    const email = e.target.elements.email.value;
+    if (!email) return;
+
+    try {
+      // Logic for adding to Firestore subscribers collection
+      const { db } = await import('../firebase');
+      const { collection, addDoc, serverTimestamp } = await import('firebase/firestore');
+      
+      await addDoc(collection(db, "subscribers"), {
+        email: email,
+        timestamp: serverTimestamp()
+      });
+      
+      alert('Thank you for subscribing! Stay tuned.');
+      e.target.reset();
+    } catch (error) {
+      console.error('Error subscribing:', error);
+      alert('Subscription failed. Please try again.');
+    }
   };
 
   const socialLinks = [
@@ -93,18 +122,36 @@ export default function Footer() {
             ))}
           </div>
 
+          {/* Support column */}
+          <div className="footer-link-col">
+            <h4 className="footer-col-title">Support</h4>
+            {footerLinks.support.map((link) => (
+              link.external ? (
+                <a key={link.to} href={link.to} target="_blank" rel="noopener noreferrer" className="footer-nav-link">
+                  {link.label}
+                </a>
+              ) : (
+                <Link key={link.to} to={link.to} className="footer-nav-link">
+                  {link.label}
+                </Link>
+              )
+            ))}
+          </div>
+
           {/* Newsletter column */}
           <div className="footer-link-col">
             <h4 className="footer-col-title">Stay Updated</h4>
             <p className="footer-newsletter-desc">
               Get the latest updates on our projects and services.
             </p>
-            <form className="footer-newsletter-form" onSubmit={(e) => e.preventDefault()}>
+            <form className="footer-newsletter-form" onSubmit={handleNewsletterSubmit}>
               <input
                 type="email"
+                name="email"
                 placeholder="your@email.com"
                 className="footer-newsletter-input"
                 aria-label="Email for newsletter"
+                required
               />
               <button type="submit" className="footer-newsletter-btn" aria-label="Subscribe to newsletter">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">

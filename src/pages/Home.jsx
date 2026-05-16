@@ -5,6 +5,7 @@ import Contact from '../components/Contact';
 import Magnetic from '../components/Magnetic';
 import Testimonials from '../components/Testimonials';
 import ProjectShowcase from '../components/ProjectShowcase';
+import Newsletter from '../components/Newsletter';
 import TiltCard from '../components/TiltCard';
 import Globe3D from '../components/Globe3D';
 import { useWindowSize } from '../hooks/useWindowSize';
@@ -54,7 +55,7 @@ export default function Home() {
                     <Globe3D color="#2563eb" height={isMobile ? '140px' : '180px'} />
                   </div>
                   <h2 className="section-title" style={{ fontSize: isMobile ? '1.8rem' : '2.5rem', marginBottom: '15px' }}>
-                    Geatz <span className="gradient-text-blue">Devolperz</span>
+                    Geatz <span className="gradient-text-blue">Developerz</span>
                   </h2>
                   <p className="section-desc" style={{ fontSize: isMobile ? '0.95rem' : '1.1rem', lineHeight: '1.5', margin: '0 auto 25px', maxWidth: '350px' }}>
                     A Department in GGz where Development phases, UX & UI are meticulously designed for clients.
@@ -107,6 +108,7 @@ export default function Home() {
 
       <ProjectShowcase />
       <Testimonials />
+      <Newsletter />
       <Contact />
     </>
   );

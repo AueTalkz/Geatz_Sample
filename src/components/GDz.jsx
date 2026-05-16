@@ -31,7 +31,7 @@ export default function GDz() {
               className="hero-text-center"
             >
               <h1 className="hero-title-lg">
-                Geatz <span className="gradient-text-blue">Devolperz</span>
+                Geatz <span className="gradient-text-blue">Developerz</span>
               </h1>
               <p className="hero-subtitle">
                 Where high-fidelity engineering meets intuitive design. We build the digital infrastructure of tomorrow.

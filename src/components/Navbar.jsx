@@ -79,6 +79,7 @@ export default function Navbar() {
     { to: '/gez', label: 'GEz', type: 'link' },
     { to: '/projects', label: 'Projects', type: 'link' },
     { to: '/team', label: 'Team', type: 'link' },
+    { to: '/pricing', label: 'Pricing', type: 'link' },
     { href: '#contact', label: 'Contact', type: 'anchor' },
   ];
 
