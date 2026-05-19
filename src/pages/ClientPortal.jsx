@@ -55,6 +55,7 @@ export default function ClientPortal({ loginOnly }) {
 function PortalLogin() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [isRegistering, setIsRegistering] = useState(false);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -65,11 +66,25 @@ function PortalLogin() {
     setError('');
     try {
       const { auth } = await import('../firebase');
-      const { signInWithEmailAndPassword } = await import('firebase/auth');
-      await signInWithEmailAndPassword(auth, email, password);
+      const { signInWithEmailAndPassword, createUserWithEmailAndPassword } = await import('firebase/auth');
+      
+      if (isRegistering) {
+        await createUserWithEmailAndPassword(auth, email, password);
+      } else {
+        await signInWithEmailAndPassword(auth, email, password);
+      }
+      
       navigate('/portal');
     } catch (err) {
-      setError('Invalid email or password.');
+      if (err.code === 'auth/email-already-in-use') {
+        setError('Email already in use. Please login instead.');
+      } else if (err.code === 'auth/wrong-password' || err.code === 'auth/user-not-found' || err.code === 'auth/invalid-credential') {
+        setError('Invalid email or password.');
+      } else if (err.code === 'auth/weak-password') {
+        setError('Password must be at least 6 characters.');
+      } else {
+        setError(err.message || 'An error occurred.');
+      }
       console.error(err);
     } finally {
       setLoading(false);
@@ -80,17 +95,29 @@ function PortalLogin() {
     <div style={{ height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '20px' }}>
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="glass-card pink-glow" style={{ width: '100%', maxWidth: '400px', padding: '40px' }}>
         <h2 className="section-title" style={{ fontSize: '2rem', marginBottom: '10px' }}>Client Portal</h2>
-        <p className="section-desc" style={{ marginBottom: '30px' }}>Access your project dashboard.</p>
+        <p className="section-desc" style={{ marginBottom: '30px' }}>
+          {isRegistering ? 'Create your client account.' : 'Access your project dashboard.'}
+        </p>
         
-        {error && <p style={{ color: '#f87171', marginBottom: '20px', fontSize: '0.9rem' }}>{error}</p>}
+        {error && <p style={{ color: '#f87171', marginBottom: '20px', fontSize: '0.9rem', textAlign: 'center' }}>{error}</p>}
         
         <form onSubmit={handleLogin} style={{ display: 'grid', gap: '20px' }}>
           <input type="email" placeholder="Email" className="contact-input" value={email} onChange={e => setEmail(e.target.value)} required style={{ width: '100%', padding: '15px', borderRadius: '10px', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', color: '#fff' }} />
           <input type="password" placeholder="Password" className="contact-input" value={password} onChange={e => setPassword(e.target.value)} required style={{ width: '100%', padding: '15px', borderRadius: '10px', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', color: '#fff' }} />
+          
           <button type="submit" disabled={loading} className="btn btn-primary" style={{ padding: '15px', width: '100%' }}>
-            {loading ? 'Entering Portal...' : 'Login'}
+            {loading ? 'Processing...' : (isRegistering ? 'Create Account' : 'Login')}
           </button>
         </form>
+
+        <div style={{ marginTop: '20px', textAlign: 'center' }}>
+          <button 
+            onClick={() => { setIsRegistering(!isRegistering); setError(''); }} 
+            style={{ background: 'none', border: 'none', color: 'rgba(255,255,255,0.6)', cursor: 'pointer', fontSize: '0.9rem', textDecoration: 'underline' }}
+          >
+            {isRegistering ? 'Already have an account? Login' : "Don't have an account? Register"}
+          </button>
+        </div>
       </motion.div>
     </div>
   );

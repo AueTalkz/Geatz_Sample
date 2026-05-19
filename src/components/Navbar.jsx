@@ -81,6 +81,7 @@ export default function Navbar() {
     { to: '/team', label: 'Team', type: 'link' },
     { to: '/pricing', label: 'Pricing', type: 'link' },
     { to: '/blog', label: 'Insights', type: 'link' },
+    { to: '/estimate', label: 'AI Estimator', type: 'link' },
     { href: '#contact', label: 'Contact', type: 'anchor' },
   ];
 

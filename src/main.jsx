@@ -14,12 +14,10 @@ if ('scrollRestoration' in history) {
 }
 
 createRoot(document.getElementById('root')).render(
-  <StrictMode>
-    <HelmetProvider>
-      <BrowserRouter>
-        <App />
-        <Analytics />
-      </BrowserRouter>
-    </HelmetProvider>
-  </StrictMode>
+  <HelmetProvider>
+    <BrowserRouter>
+      <App />
+      <Analytics />
+    </BrowserRouter>
+  </HelmetProvider>
 );

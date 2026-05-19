@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Seo from '../components/Seo';
 import Magnetic from '../components/Magnetic';
@@ -6,10 +6,17 @@ import Magnetic from '../components/Magnetic';
 export default function CareersPage() {
   const [activeTab, setActiveTab] = useState('all');
   const [formStatus, setFormStatus] = useState('idle');
+  const [jobs, setJobs] = useState([]);
+  
+  // Application fields
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [url, setUrl] = useState('');
+  const [superpower, setSuperpower] = useState('');
 
-  const jobs = [
+  const fallbackJobs = [
     {
-      id: 1,
+      id: 'fallback-1',
       title: 'Senior Frontend Engineer',
       type: 'Full-time',
       location: 'Remote / Global',
@@ -17,7 +24,7 @@ export default function CareersPage() {
       description: 'Lead the development of immersive, high-performance web experiences using React and Three.js.'
     },
     {
-      id: 2,
+      id: 'fallback-2',
       title: 'Social Media Strategist',
       type: 'Part-time / Contract',
       location: 'Hybrid',
@@ -25,7 +32,7 @@ export default function CareersPage() {
       description: 'Craft viral content strategies and manage community growth for our high-end media clients.'
     },
     {
-      id: 3,
+      id: 'fallback-3',
       title: 'Full-Stack Developer',
       type: 'Full-time',
       location: 'Remote',
@@ -33,6 +40,26 @@ export default function CareersPage() {
       description: 'Architect robust backend systems and CRM integrations with Node.js and Firebase.'
     }
   ];
+
+  useEffect(() => {
+    const fetchJobs = async () => {
+      try {
+        const { db } = await import('../firebase');
+        const { collection, getDocs, query, orderBy } = await import('firebase/firestore');
+        const q = query(collection(db, "job_openings"), orderBy("createdAt", "desc"));
+        const snap = await getDocs(q);
+        if (snap.empty) {
+          setJobs(fallbackJobs);
+        } else {
+          setJobs(snap.docs.map(doc => ({ id: doc.id, ...doc.data() })));
+        }
+      } catch (err) {
+        console.error("Failed to fetch jobs:", err);
+        setJobs(fallbackJobs);
+      }
+    };
+    fetchJobs();
+  }, []);
 
   const benefits = [
     { title: 'Global Remote', desc: 'Work from anywhere in the world.' },
@@ -45,12 +72,28 @@ export default function CareersPage() {
     e.preventDefault();
     setFormStatus('loading');
     
-    // Simulate API call
-    setTimeout(() => {
+    try {
+      const { db } = await import('../firebase');
+      const { collection, addDoc, serverTimestamp } = await import('firebase/firestore');
+      
+      await addDoc(collection(db, "job_applications"), {
+        name,
+        email,
+        url,
+        superpower,
+        createdAt: serverTimestamp()
+      });
+      
       setFormStatus('success');
-      e.target.reset();
+      setName('');
+      setEmail('');
+      setUrl('');
+      setSuperpower('');
       setTimeout(() => setFormStatus('idle'), 5000);
-    }, 2000);
+    } catch (err) {
+      console.error("Error submitting application:", err);
+      setFormStatus('error');
+    }
   };
 
   return (
@@ -147,11 +190,11 @@ export default function CareersPage() {
             
             <form onSubmit={handleApply} style={{ display: 'grid', gap: '20px' }}>
               <div className="grid-container two-cols" style={{ gap: '20px' }}>
-                <input type="text" placeholder="Full Name" className="contact-input" required style={{ width: '100%', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', padding: '15px', borderRadius: '12px', color: '#fff' }} />
-                <input type="email" placeholder="Email Address" className="contact-input" required style={{ width: '100%', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', padding: '15px', borderRadius: '12px', color: '#fff' }} />
+                <input type="text" placeholder="Full Name" className="contact-input" required value={name} onChange={e => setName(e.target.value)} style={{ width: '100%', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', padding: '15px', borderRadius: '12px', color: '#fff' }} />
+                <input type="email" placeholder="Email Address" className="contact-input" required value={email} onChange={e => setEmail(e.target.value)} style={{ width: '100%', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', padding: '15px', borderRadius: '12px', color: '#fff' }} />
               </div>
-              <input type="text" placeholder="Portfolio or LinkedIn URL" className="contact-input" required style={{ width: '100%', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', padding: '15px', borderRadius: '12px', color: '#fff' }} />
-              <textarea placeholder="Tell us about your superpower" rows="4" className="contact-input" required style={{ width: '100%', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', padding: '15px', borderRadius: '12px', color: '#fff', resize: 'none' }}></textarea>
+              <input type="text" placeholder="Portfolio or LinkedIn URL" className="contact-input" required value={url} onChange={e => setUrl(e.target.value)} style={{ width: '100%', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', padding: '15px', borderRadius: '12px', color: '#fff' }} />
+              <textarea placeholder="Tell us about your superpower" rows="4" className="contact-input" required value={superpower} onChange={e => setSuperpower(e.target.value)} style={{ width: '100%', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', padding: '15px', borderRadius: '12px', color: '#fff', resize: 'none' }}></textarea>
               
               <button type="submit" disabled={formStatus === 'loading'} className="btn btn-primary" style={{ padding: '18px', width: '100%' }}>
                 {formStatus === 'loading' ? 'Sending...' : 'Submit Application'}
@@ -162,6 +205,11 @@ export default function CareersPage() {
               {formStatus === 'success' && (
                 <motion.p initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} style={{ color: '#4ade80', textAlign: 'center', marginTop: '20px', fontWeight: 'bold' }}>
                   Application received! We'll be in touch. 🚀
+                </motion.p>
+              )}
+              {formStatus === 'error' && (
+                <motion.p initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} style={{ color: '#f87171', textAlign: 'center', marginTop: '20px', fontWeight: 'bold' }}>
+                  Something went wrong. Please try again.
                 </motion.p>
               )}
             </AnimatePresence>

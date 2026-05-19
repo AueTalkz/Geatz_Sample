@@ -1,4 +1,4 @@
-import { useRef, useMemo } from 'react';
+import { useRef, useMemo, Suspense } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { Float, Sphere, MeshDistortMaterial, PerspectiveCamera, Stars, Environment, ContactShadows } from '@react-three/drei';
 import * as THREE from 'three';
@@ -14,7 +14,7 @@ function BackgroundElements() {
   
   // Custom particles
   const particlesCount = 3000;
-  const [positions, colors] = useMemo(() => {
+  const [posAttr, colAttr] = useMemo(() => {
     const pos = new Float32Array(particlesCount * 3);
     const col = new Float32Array(particlesCount * 3);
     for (let i = 0; i < particlesCount; i++) {
@@ -24,23 +24,23 @@ function BackgroundElements() {
       
       const r = Math.random();
       if (r > 0.6) {
-        // Cyan/Blue
         col[i * 3] = 0.02;
         col[i * 3 + 1] = 0.71;
         col[i * 3 + 2] = 0.83;
       } else if (r > 0.3) {
-        // Pink/Purple
         col[i * 3] = 0.86;
         col[i * 3 + 1] = 0.15;
         col[i * 3 + 2] = 0.47;
       } else {
-        // White/Soft
         col[i * 3] = 0.8;
         col[i * 3 + 1] = 0.8;
         col[i * 3 + 2] = 1.0;
       }
     }
-    return [pos, col];
+    // Build BufferAttribute objects once — compatible with R3F v9 / Three r150+
+    const positionAttr = new THREE.BufferAttribute(pos, 3);
+    const colorAttr = new THREE.BufferAttribute(col, 3);
+    return [positionAttr, colorAttr];
   }, []);
 
   const isMobile = width < 768;
@@ -94,18 +94,8 @@ function BackgroundElements() {
 
       <points ref={particlesRef}>
         <bufferGeometry>
-          <bufferAttribute
-            attach="attributes-position"
-            count={positions.length / 3}
-            array={positions}
-            itemSize={3}
-          />
-          <bufferAttribute
-            attach="attributes-color"
-            count={colors.length / 3}
-            array={colors}
-            itemSize={3}
-          />
+          <primitive object={posAttr} attach="attributes-position" />
+          <primitive object={colAttr} attach="attributes-color" />
         </bufferGeometry>
         <pointsMaterial
           size={isMobile ? 0.1 : 0.08}
@@ -149,16 +139,18 @@ function BackgroundElements() {
           </Float>
         </>
       )}
-      
-      <ContactShadows 
-        position={[0, -10, 0]} 
-        opacity={0.4} 
-        scale={40} 
-        blur={2} 
-        far={15} 
-        resolution={256} 
-        color="#000000" 
-      />
+
+      <Suspense fallback={null}>
+        <ContactShadows 
+          position={[0, -10, 0]} 
+          opacity={0.4} 
+          scale={40} 
+          blur={2} 
+          far={15} 
+          resolution={256} 
+          color="#000000" 
+        />
+      </Suspense>
     </>
   );
 }

@@ -22,6 +22,9 @@ export default class ErrorBoundary extends Component {
 
   render() {
     if (this.state.hasError) {
+      if (this.props.silent) {
+        return this.props.fallback || null;
+      }
       return (
         <div style={{
           minHeight: '60vh',

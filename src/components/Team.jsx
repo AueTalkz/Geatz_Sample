@@ -1,33 +1,53 @@
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import TiltCard from './TiltCard';
+import { db } from '../firebase';
+import { collection, getDocs, query, orderBy } from 'firebase/firestore';
+
+const fallbackTeamMembers = [
+  {
+    name: 'Geatz',
+    role: 'Founder & Creative Director',
+    bio: 'Visionary leader bridging the gap between high-end code and cinematic storytelling.',
+    color: '#a855f7'
+  },
+  {
+    name: 'Sudharsan',
+    role: 'Co founder & Lead Full-Stack Developer (GDz)',
+    bio: 'Expert in scalable architectures and futuristic user interfaces.',
+    color: '#2563eb'
+  },
+  {
+    name: 'Karthikayini',
+    role: 'Lead Social Media Manager',
+    bio: 'Strategic mastermind specialized in viral growth and high-energy digital content.',
+    color: '#db2777'
+  },
+  {
+    name: 'Dhrishya',
+    role: 'Graphic Designer',
+    bio: 'Creative artisan dedicated to crafting striking visual narratives and brand aesthetics.',
+    color: '#06b6d4'
+  }
+];
 
 export default function Team() {
-  const teamMembers = [
-    {
-      name: 'Geatz',
-      role: 'Founder & Creative Director',
-      bio: 'Visionary leader bridging the gap between high-end code and cinematic storytelling.',
-      color: '#a855f7'
-    },
-    {
-      name: 'Sudharsan',
-      role: 'Co founder & Lead Full-Stack Developer (GDz)',
-      bio: 'Expert in scalable architectures and futuristic user interfaces.',
-      color: '#2563eb'
-    },
-    {
-      name: 'Karthikayini',
-      role: 'Lead Social Media Manager',
-      bio: 'Strategic mastermind specialized in viral growth and high-energy digital content.',
-      color: '#db2777'
-    },
-    {
-      name: 'Dhrishya',
-      role: 'Graphic Designer',
-      bio: 'Creative artisan dedicated to crafting striking visual narratives and brand aesthetics.',
-      color: '#06b6d4'
-    }
-  ];
+  const [teamMembers, setTeamMembers] = useState(fallbackTeamMembers);
+
+  useEffect(() => {
+    const fetchTeam = async () => {
+      try {
+        const q = query(collection(db, "team_members"), orderBy("order", "asc"));
+        const snap = await getDocs(q);
+        if (!snap.empty) {
+          setTeamMembers(snap.docs.map(doc => ({ id: doc.id, ...doc.data() })));
+        }
+      } catch (err) {
+        console.error("Failed to fetch team members from Firestore, using fallback", err);
+      }
+    };
+    fetchTeam();
+  }, []);
 
   const containerVars = {
     hidden: { opacity: 0 },

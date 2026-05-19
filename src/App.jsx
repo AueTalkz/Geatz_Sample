@@ -1,4 +1,4 @@
-import { lazy, Suspense } from 'react';
+import { lazy, Suspense, useState, useEffect } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import Navbar from './components/Navbar';
@@ -8,10 +8,11 @@ import SmoothScroll from './components/SmoothScroll';
 import ScrollToTop from './components/ScrollToTop';
 import ScrollProgress from './components/ScrollProgress';
 import BackToTop from './components/BackToTop';
+import ChatWidget from './components/ChatWidget';
 import ErrorBoundary from './components/ErrorBoundary';
 import Seo from './components/Seo';
 
-import Scene3D from './components/Scene3D';
+import InteractiveBackground from './components/InteractiveBackground';
 
 // Lazy-loaded pages for code splitting
 const Home = lazy(() => import('./pages/Home'));
@@ -27,6 +28,7 @@ const BlogPostPage = lazy(() => import('./pages/BlogPostPage'));
 const CareersPage = lazy(() => import('./pages/CareersPage'));
 const AdminPage = lazy(() => import('./pages/AdminPage'));
 const ClientPortal = lazy(() => import('./pages/ClientPortal'));
+const EstimatorPage = lazy(() => import('./pages/EstimatorPage'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 
 // Protected Route Component
@@ -98,15 +100,34 @@ const PageLoader = () => (
   </div>
 );
 
+const pageVariants = {
+  initial: { opacity: 0, x: 20 },
+  animate: { opacity: 1, x: 0 },
+  exit: { opacity: 0, x: -20 }
+};
+
 const PageTransition = ({ children }) => (
   <motion.div
-    initial={{ opacity: 0, x: 20 }}
-    animate={{ opacity: 1, x: 0 }}
-    exit={{ opacity: 0, x: -20 }}
+    variants={pageVariants}
+    initial="initial"
+    animate="animate"
+    exit="exit"
     transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
   >
     {children}
   </motion.div>
+);
+
+const SceneFallback = () => (
+  <div style={{
+    position: 'fixed',
+    top: 0,
+    left: 0,
+    width: '100%',
+    height: '100%',
+    zIndex: -1,
+    background: 'radial-gradient(circle at center, #0a0a1a 0%, #050505 100%)'
+  }} />
 );
 
 function App() {
@@ -118,14 +139,15 @@ function App() {
       <ScrollToTop />
       <ScrollProgress />
       
-      <ErrorBoundary fallbackMessage="The 3D scene encountered an issue. The rest of the site still works.">
-        <Scene3D />
+      <ErrorBoundary silent fallback={<SceneFallback />}>
+        <InteractiveBackground />
       </ErrorBoundary>
       
       <div className="noise-overlay"></div>
       
       <CustomCursor />
       <BackToTop />
+      <ChatWidget />
       
       <Navbar />
       
@@ -148,6 +170,7 @@ function App() {
               <Route path="/admin/login" element={<PageTransition><AdminPage loginOnly /></PageTransition>} />
               <Route path="/portal/*" element={<PageTransition><ClientPortal /></PageTransition>} />
               <Route path="/portal/login" element={<PageTransition><ClientPortal loginOnly /></PageTransition>} />
+              <Route path="/estimate" element={<PageTransition><EstimatorPage /></PageTransition>} />
               <Route path="*" element={<PageTransition><NotFound /></PageTransition>} />
             </Routes>
           </AnimatePresence>

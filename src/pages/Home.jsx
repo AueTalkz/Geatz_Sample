@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import Hero from '../components/Hero';
 import Contact from '../components/Contact';
@@ -13,6 +13,7 @@ import { useWindowSize } from '../hooks/useWindowSize';
 export default function Home() {
   const { width } = useWindowSize();
   const isMobile = width < 768;
+  const navigate = useNavigate();
 
   const cardVariantsLeft = {
     hidden: { opacity: 0, x: -50 },
@@ -48,28 +49,27 @@ export default function Home() {
               whileInView="visible"
               viewport={{ once: true, margin: "-100px" }}
               style={{ cursor: 'pointer' }}
+              onClick={() => navigate('/gdz')}
             >
-              <Link to="/gdz" style={{ textDecoration: 'none', color: 'inherit' }}>
-                <TiltCard className="glass-card blue-glow division-card" style={{ textAlign: 'center', minHeight: isMobile ? 'auto' : '550px' }}>
-                  <div style={{ height: isMobile ? '140px' : '180px', marginBottom: isMobile ? '10px' : '20px' }}>
-                    <Globe3D color="#2563eb" height={isMobile ? '140px' : '180px'} />
-                  </div>
-                  <h2 className="section-title" style={{ fontSize: isMobile ? '1.8rem' : '2.5rem', marginBottom: '15px' }}>
-                    Geatz <span className="gradient-text-blue">Developerz</span>
-                  </h2>
-                  <p className="section-desc" style={{ fontSize: isMobile ? '0.95rem' : '1.1rem', lineHeight: '1.5', margin: '0 auto 25px', maxWidth: '350px' }}>
-                    A Department in GGz where Development phases, UX & UI are meticulously designed for clients.
-                  </p>
-                  <div className="hero-buttons" style={{ gap: '10px', justifyContent: 'center', marginTop: 'auto' }}>
-                    <Magnetic>
-                      <span className="btn btn-primary" style={{ minWidth: '130px', padding: '12px 20px', fontSize: '0.9rem' }}>Detailed View</span>
-                    </Magnetic>
-                    <Magnetic>
-                      <a href="#contact" className="btn btn-outline" style={{ minWidth: '130px', padding: '12px 20px', fontSize: '0.9rem' }} onClick={(e) => e.stopPropagation()}>Contact</a>
-                    </Magnetic>
-                  </div>
-                </TiltCard>
-              </Link>
+              <TiltCard className="glass-card blue-glow division-card" style={{ textAlign: 'center', minHeight: isMobile ? 'auto' : '550px' }}>
+                <div style={{ height: isMobile ? '140px' : '180px', marginBottom: isMobile ? '10px' : '20px' }}>
+                  <Globe3D color="#2563eb" height={isMobile ? '140px' : '180px'} />
+                </div>
+                <h2 className="section-title" style={{ fontSize: isMobile ? '1.8rem' : '2.5rem', marginBottom: '15px' }}>
+                  Geatz <span className="gradient-text-blue">Developerz</span>
+                </h2>
+                <p className="section-desc" style={{ fontSize: isMobile ? '0.95rem' : '1.1rem', lineHeight: '1.5', margin: '0 auto 25px', maxWidth: '350px' }}>
+                  A Department in GGz where Development phases, UX & UI are meticulously designed for clients.
+                </p>
+                <div className="hero-buttons" style={{ gap: '10px', justifyContent: 'center', marginTop: 'auto' }}>
+                  <Magnetic>
+                    <span className="btn btn-primary" style={{ minWidth: '130px', padding: '12px 20px', fontSize: '0.9rem' }}>Detailed View</span>
+                  </Magnetic>
+                  <Magnetic>
+                    <a href="#contact" className="btn btn-outline" style={{ minWidth: '130px', padding: '12px 20px', fontSize: '0.9rem' }} onClick={(e) => { e.stopPropagation(); document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' }); }}>Contact</a>
+                  </Magnetic>
+                </div>
+              </TiltCard>
             </motion.div>
 
             {/* GEz Column */}
@@ -79,28 +79,27 @@ export default function Home() {
               whileInView="visible"
               viewport={{ once: true, margin: "-100px" }}
               style={{ cursor: 'pointer' }}
+              onClick={() => navigate('/gez')}
             >
-              <Link to="/gez" style={{ textDecoration: 'none', color: 'inherit' }}>
-                <TiltCard className="glass-card pink-glow division-card" style={{ textAlign: 'center', minHeight: isMobile ? 'auto' : '550px' }}>
-                  <div style={{ height: isMobile ? '140px' : '180px', marginBottom: isMobile ? '10px' : '20px' }}>
-                    <Globe3D color="#db2777" height={isMobile ? '140px' : '180px'} />
-                  </div>
-                  <h2 className="section-title" style={{ fontSize: isMobile ? '1.8rem' : '2.5rem', marginBottom: '15px' }}>
-                    Geatz <span className="gradient-text-pink">Entertainmentz</span>
-                  </h2>
-                  <p className="section-desc" style={{ fontSize: isMobile ? '0.95rem' : '1.1rem', lineHeight: '1.5', margin: '0 auto 25px', maxWidth: '350px' }}>
-                    A Department in GGz where Content Creation & related stuff like Content Shoots, Scripts, Writing.
-                  </p>
-                  <div className="hero-buttons" style={{ gap: '10px', justifyContent: 'center', marginTop: 'auto' }}>
-                    <Magnetic>
-                      <span className="btn btn-primary" style={{ minWidth: '130px', padding: '12px 20px', fontSize: '0.9rem' }}>Detailed View</span>
-                    </Magnetic>
-                    <Magnetic>
-                      <a href="#contact" className="btn btn-outline" style={{ minWidth: '130px', padding: '12px 20px', fontSize: '0.9rem' }} onClick={(e) => e.stopPropagation()}>Contact</a>
-                    </Magnetic>
-                  </div>
-                </TiltCard>
-              </Link>
+              <TiltCard className="glass-card pink-glow division-card" style={{ textAlign: 'center', minHeight: isMobile ? 'auto' : '550px' }}>
+                <div style={{ height: isMobile ? '140px' : '180px', marginBottom: isMobile ? '10px' : '20px' }}>
+                  <Globe3D color="#db2777" height={isMobile ? '140px' : '180px'} />
+                </div>
+                <h2 className="section-title" style={{ fontSize: isMobile ? '1.8rem' : '2.5rem', marginBottom: '15px' }}>
+                  Geatz <span className="gradient-text-pink">Entertainmentz</span>
+                </h2>
+                <p className="section-desc" style={{ fontSize: isMobile ? '0.95rem' : '1.1rem', lineHeight: '1.5', margin: '0 auto 25px', maxWidth: '350px' }}>
+                  A Department in GGz where Content Creation & related stuff like Content Shoots, Scripts, Writing.
+                </p>
+                <div className="hero-buttons" style={{ gap: '10px', justifyContent: 'center', marginTop: 'auto' }}>
+                  <Magnetic>
+                    <span className="btn btn-primary" style={{ minWidth: '130px', padding: '12px 20px', fontSize: '0.9rem' }}>Detailed View</span>
+                  </Magnetic>
+                  <Magnetic>
+                    <a href="#contact" className="btn btn-outline" style={{ minWidth: '130px', padding: '12px 20px', fontSize: '0.9rem' }} onClick={(e) => { e.stopPropagation(); document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' }); }}>Contact</a>
+                  </Magnetic>
+                </div>
+              </TiltCard>
             </motion.div>
           </div>
         </div>

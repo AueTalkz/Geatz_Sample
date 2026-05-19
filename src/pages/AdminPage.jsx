@@ -2,6 +2,11 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import Seo from '../components/Seo';
+import AdminProjects from '../components/admin/AdminProjects';
+import AdminTeam from '../components/admin/AdminTeam';
+import AdminTestimonials from '../components/admin/AdminTestimonials';
+import AdminClients from '../components/admin/AdminClients';
+import AdminCareers from '../components/admin/AdminCareers';
 
 export default function AdminPage({ loginOnly }) {
   const [user, setUser] = useState(null);
@@ -47,6 +52,10 @@ export default function AdminPage({ loginOnly }) {
                 <AdminNavBtn label="Dashboard" icon="📊" active={activeTab === 'dashboard'} onClick={() => setActiveTab('dashboard')} />
                 <AdminNavBtn label="Blog Posts" icon="📝" active={activeTab === 'blog'} onClick={() => setActiveTab('blog')} />
                 <AdminNavBtn label="Projects" icon="🎨" active={activeTab === 'projects'} onClick={() => setActiveTab('projects')} />
+                <AdminNavBtn label="Client Portal" icon="🔐" active={activeTab === 'clients'} onClick={() => setActiveTab('clients')} />
+                <AdminNavBtn label="Team Members" icon="👥" active={activeTab === 'team'} onClick={() => setActiveTab('team')} />
+                <AdminNavBtn label="Careers" icon="💼" active={activeTab === 'careers'} onClick={() => setActiveTab('careers')} />
+                <AdminNavBtn label="Testimonials" icon="⭐" active={activeTab === 'testimonials'} onClick={() => setActiveTab('testimonials')} />
                 <AdminNavBtn label="Subscribers" icon="📧" active={activeTab === 'subscribers'} onClick={() => setActiveTab('subscribers')} />
                 <div style={{ marginTop: '20px', paddingTop: '20px', borderTop: '1px solid rgba(255,255,255,0.1)' }}>
                   <button onClick={async () => {
@@ -64,8 +73,12 @@ export default function AdminPage({ loginOnly }) {
             <AnimatePresence mode="wait">
               {activeTab === 'dashboard' && <AdminDashboard key="dashboard" />}
               {activeTab === 'blog' && <AdminBlog key="blog" />}
+              {activeTab === 'projects' && <AdminProjects key="projects" />}
+              {activeTab === 'clients' && <AdminClients key="clients" />}
+              {activeTab === 'team' && <AdminTeam key="team" />}
+              {activeTab === 'careers' && <AdminCareers key="careers" />}
+              {activeTab === 'testimonials' && <AdminTestimonials key="testimonials" />}
               {activeTab === 'subscribers' && <AdminSubscribers key="subscribers" />}
-              {/* Projects can be added next */}
             </AnimatePresence>
           </main>
 

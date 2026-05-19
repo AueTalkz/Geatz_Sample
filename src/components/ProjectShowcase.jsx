@@ -1,14 +1,16 @@
-import { useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { useWindowSize } from '../hooks/useWindowSize';
+import { db } from '../firebase';
+import { collection, getDocs, query, orderBy } from 'firebase/firestore';
 
 import ecommerceImg from '../assets/projects/ecommerce.png';
 import brandImg from '../assets/projects/brand.png';
 import saasImg from '../assets/projects/saas.png';
 import promoImg from '../assets/projects/promo.png';
 
-const projects = [
+const fallbackProjects = [
   {
     id: 'e-commerce-redesign',
     title: 'E-Commerce Redesign',
@@ -42,6 +44,22 @@ const projects = [
 export default function ProjectShowcase() {
   const targetRef = useRef(null);
   const { width: windowWidth } = useWindowSize();
+  const [projects, setProjects] = useState(fallbackProjects);
+
+  useEffect(() => {
+    const fetchProjects = async () => {
+      try {
+        const q = query(collection(db, "projects"), orderBy("createdAt", "desc"));
+        const snap = await getDocs(q);
+        if (!snap.empty) {
+          setProjects(snap.docs.map(doc => ({ id: doc.id, ...doc.data() })));
+        }
+      } catch (err) {
+        console.error("Failed to fetch projects from Firestore, using fallback", err);
+      }
+    };
+    fetchProjects();
+  }, []);
 
   const isMobile = windowWidth <= 768;
   const isTablet = windowWidth > 768 && windowWidth <= 1024;

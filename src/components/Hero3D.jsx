@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, Suspense } from 'react';
 import { Canvas, useFrame, useThree, useLoader } from '@react-three/fiber';
 import { Float, Environment, Sparkles } from '@react-three/drei';
 import * as THREE from 'three';
@@ -143,8 +143,12 @@ export default function Hero3D() {
         <ambientLight intensity={0.6} />
         <pointLight position={[5, 5, 5]} intensity={0.8} color="#38bdf8" />
         <pointLight position={[-5, -3, 5]} intensity={0.4} color="#818cf8" />
-        <Environment preset="night" />
-        <OrbitalLogo />
+        <Suspense fallback={null}>
+          <Environment preset="night" />
+        </Suspense>
+        <Suspense fallback={null}>
+          <OrbitalLogo />
+        </Suspense>
       </Canvas>
     </div>
   );

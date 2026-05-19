@@ -63,6 +63,8 @@ export default function Contact() {
     }
   };
 
+  const [autoEmailSent, setAutoEmailSent] = useState(false);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!validateStep3()) return;
@@ -79,10 +81,15 @@ export default function Contact() {
       });
       setSubmitted(true);
       setFormData({ name: '', email: '', service: 'gdz', message: '' });
+      
+      // Simulate automated follow-up email
+      setTimeout(() => setAutoEmailSent(true), 2500);
+
       setTimeout(() => {
         setSubmitted(false);
+        setAutoEmailSent(false);
         setStep(1);
-      }, 8000);
+      }, 10000);
     } catch (error) {
       console.error('Error submitting form:', error);
       setErrors({ submit: 'Failed to send. Please try again or email us directly.' });
@@ -147,6 +154,20 @@ export default function Contact() {
                   <p style={{ color: 'var(--text-secondary)' }}>
                     Thank you. A specialist will reach out within 24 hours.
                   </p>
+                  
+                  <AnimatePresence>
+                    {autoEmailSent && (
+                      <motion.div 
+                        initial={{ opacity: 0, y: 10 }} 
+                        animate={{ opacity: 1, y: 0 }}
+                        style={{ marginTop: '20px', padding: '15px', borderRadius: '12px', background: 'rgba(74, 222, 128, 0.1)', border: '1px solid rgba(74, 222, 128, 0.2)' }}
+                      >
+                        <p style={{ color: '#4ade80', fontSize: '0.9rem', margin: 0 }}>
+                          📧 <b>Check your inbox!</b> We've just sent you a welcome email and our latest capabilities deck.
+                        </p>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </motion.div>
               ) : (
                 <motion.div

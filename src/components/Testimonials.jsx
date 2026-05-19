@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { db } from '../firebase';
+import { collection, getDocs, query, orderBy } from 'firebase/firestore';
 
-const testimonials = [
+const fallbackTestimonials = [
   {
     name: 'Sarah Mitchell',
     role: 'CEO, Nexus Digital',
@@ -23,7 +25,23 @@ const testimonials = [
 ];
 
 export default function Testimonials() {
+  const [testimonials, setTestimonials] = useState(fallbackTestimonials);
   const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    const fetchTestimonials = async () => {
+      try {
+        const q = query(collection(db, "testimonials"), orderBy("createdAt", "desc"));
+        const snap = await getDocs(q);
+        if (!snap.empty) {
+          setTestimonials(snap.docs.map(doc => ({ id: doc.id, ...doc.data() })));
+        }
+      } catch (err) {
+        console.error("Failed to fetch testimonials from Firestore, using fallback", err);
+      }
+    };
+    fetchTestimonials();
+  }, []);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -49,25 +67,29 @@ export default function Testimonials() {
               exit={{ opacity: 0, x: -20 }}
               transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
             >
-              <div 
-                className="member-avatar" 
-                style={{ 
-                  margin: '0 auto 30px', 
-                  width: '70px', 
-                  height: '70px', 
-                  background: 'linear-gradient(135deg, var(--brand-purple), var(--brand-blue))',
-                  fontSize: '1.6rem'
-                }}
-              >
-                {testimonials[index].avatar}
-              </div>
-              <p className="testimonial-text">
-                "{testimonials[index].text}"
-              </p>
-              <h4 style={{ fontSize: '1.2rem', marginBottom: '5px' }}>{testimonials[index].name}</h4>
-              <div style={{ color: 'var(--brand-cyan)', fontSize: '0.9rem', fontWeight: 600 }}>
-                {testimonials[index].role}
-              </div>
+              {testimonials.length > 0 && (
+                <>
+                  <div 
+                    className="member-avatar" 
+                    style={{ 
+                      margin: '0 auto 30px', 
+                      width: '70px', 
+                      height: '70px', 
+                      background: 'linear-gradient(135deg, var(--brand-purple), var(--brand-blue))',
+                      fontSize: '1.6rem'
+                    }}
+                  >
+                    {testimonials[index]?.avatar || testimonials[index]?.name?.charAt(0)}
+                  </div>
+                  <p className="testimonial-text">
+                    "{testimonials[index]?.text}"
+                  </p>
+                  <h4 style={{ fontSize: '1.2rem', marginBottom: '5px' }}>{testimonials[index]?.name}</h4>
+                  <div style={{ color: 'var(--brand-cyan)', fontSize: '0.9rem', fontWeight: 600 }}>
+                    {testimonials[index]?.role}
+                  </div>
+                </>
+              )}
             </motion.div>
           </AnimatePresence>
 
