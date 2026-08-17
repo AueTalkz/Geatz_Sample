@@ -20,6 +20,7 @@ export default function Navbar({ activePage, setActivePage }) {
   const navItems = [
     { id: 'home', label: 'Home' },
     { id: 'about', label: 'About' },
+    { id: 'founders', label: 'Founders' },
     { id: 'services', label: 'Services' },
     { id: 'portfolio', label: 'Portfolio' },
     { id: 'community', label: 'Geeks Community' },

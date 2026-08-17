@@ -68,7 +68,7 @@ export default function Footer({ setActivePage }) {
           <div>
             <h4 className="text-white font-semibold mb-5 brand-font text-base tracking-wider uppercase">Navigation</h4>
             <ul className="space-y-3 text-sm">
-              {['home', 'about', 'services', 'portfolio'].map((page) => (
+              {['home', 'about', 'founders', 'services', 'portfolio'].map((page) => (
                 <li key={page}>
                   <button
                     onClick={() => scrollToTopPage(page)}
@@ -96,10 +96,10 @@ export default function Footer({ setActivePage }) {
               </li>
               <li>
                 <button
-                  onClick={() => scrollToTopPage('services')}
+                  onClick={() => scrollToTopPage('founders')}
                   className="text-slate-400 hover:text-cyan-400 transition-colors"
                 >
-                  Video Editing
+                  Founders & CEO
                 </button>
               </li>
               <li>
@@ -107,7 +107,7 @@ export default function Footer({ setActivePage }) {
                   onClick={() => scrollToTopPage('services')}
                   className="text-slate-400 hover:text-cyan-400 transition-colors"
                 >
-                  Creator Branding
+                  Video Editing
                 </button>
               </li>
               <li>

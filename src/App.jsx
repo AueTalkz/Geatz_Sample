@@ -5,6 +5,7 @@ import VideoModal from './components/VideoModal.jsx';
 
 import HomePage from './pages/HomePage.jsx';
 import AboutPage from './pages/AboutPage.jsx';
+import FoundersPage from './pages/FoundersPage.jsx';
 import ServicesPage from './pages/ServicesPage.jsx';
 import PortfolioPage from './pages/PortfolioPage.jsx';
 import CommunityPage from './pages/CommunityPage.jsx';
@@ -20,6 +21,8 @@ export default function App() {
         return <HomePage setActivePage={setActivePage} setSelectedVideo={setSelectedVideo} />;
       case 'about':
         return <AboutPage setActivePage={setActivePage} />;
+      case 'founders':
+        return <FoundersPage setActivePage={setActivePage} />;
       case 'services':
         return <ServicesPage setActivePage={setActivePage} />;
       case 'portfolio':
