@@ -1,5 +1,6 @@
 import React from 'react';
-import { Video, Sparkles, Target, TrendingUp, CheckCircle, ArrowRight, Layers, Cpu, Flame, Shield } from 'lucide-react';
+import BlueprintQuiz from '../components/BlueprintQuiz.jsx';
+import { Video, Sparkles, Target, TrendingUp, CheckCircle, ArrowRight, Layers, Cpu, Shield } from 'lucide-react';
 
 export default function ServicesPage({ setActivePage }) {
   
@@ -8,204 +9,197 @@ export default function ServicesPage({ setActivePage }) {
       id: 'video-editing',
       icon: Video,
       title: 'Video Editing',
-      tagline: 'High-Retention Short-Form & Cinematic YouTube Edits',
+      tagline: 'High-Retention Short-Form & Cinematic Edits',
       description: 'We transform raw footage into captivating visual narratives using pacing psychology, kinetic typography, dynamic sound design, and color grading.',
       features: [
-        'Short-Form Content (Reels, TikToks, Shorts)',
-        'Long-Form YouTube Documentaries & Vlogs',
-        'Cinematic Storytelling & Trailer Edits',
-        'Sound Design, FX & Color Grading'
+        'Reels, TikToks, Shorts',
+        'Long-Form Documentaries & Vlogs',
+        'Cinematic Storytelling & Trailers',
+        'Sound FX & Color Grading'
       ],
       process: [
-        { step: '01', title: 'Footage Audit & Hook Draft', desc: 'Analyzing raw clips and crafting high-retention 3-second opening hooks.' },
-        { step: '02', title: 'Pacing & Narrative Cut', desc: 'Structuring story arcs, removing dead space, and adding sound effects.' },
-        { step: '03', title: 'Motion Graphics & Polish', desc: 'Adding custom text overlays, animations, color grade, and master render.' }
+        { step: '01', title: 'Hook Draft', desc: 'Crafting high-retention opening hooks.' },
+        { step: '02', title: 'Pacing Cut', desc: 'Structuring story arcs and sound design.' },
+        { step: '03', title: 'Motion Polish', desc: 'Adding text overlays, FX, and color grade.' }
       ],
       benefits: [
         'Up to +65% Average View Duration',
         'Algorithm-engineered retention spikes',
-        'Turnaround in as fast as 24-48 hours'
-      ],
-      badgeColor: 'bg-violet-500/20 text-violet-300 border-violet-500/30'
+        'Turnaround as fast as 24-48 hours'
+      ]
     },
     {
       id: 'content-creation',
       icon: Sparkles,
-      title: 'Content Creation & Direction',
+      title: 'Content Direction',
       tagline: 'End-to-End Creative Concepts & Visual Planning',
       description: 'Overcome creator block with structured video ideation, hook scripting, shot lists, and creative direction designed for your niche.',
       features: [
         'Viral Concept & Hook Development',
         'Scripting & Storyboarding',
-        'Visual Planning & B-Roll Shotlists',
-        'Content Direction & Framing Feedback'
+        'Visual B-Roll Shotlists',
+        'Framing & Delivery Feedback'
       ],
       process: [
-        { step: '01', title: 'Niche Analysis & Trend Mapping', desc: 'Identifying high-volume search topics and trending formats.' },
-        { step: '02', title: 'Scripting & Hook Blueprint', desc: 'Writing punchy scripts designed for maximum viewer intrigue.' },
-        { step: '03', title: 'Production Guide', desc: 'Providing clear lighting, angle, and delivery instructions.' }
+        { step: '01', title: 'Trend Mapping', desc: 'Identifying high-volume search topics.' },
+        { step: '02', title: 'Hook Blueprint', desc: 'Writing punchy scripts for intrigue.' },
+        { step: '03', title: 'Production Guide', desc: 'Clear lighting and angle instructions.' }
       ],
       benefits: [
         'Eliminates creator burnout',
         'Consistent weekly video pipeline',
-        'Higher audience engagement rates'
-      ],
-      badgeColor: 'bg-cyan-500/20 text-cyan-300 border-cyan-500/30'
+        'Higher audience engagement'
+      ]
     },
     {
       id: 'creator-branding',
       icon: Target,
       title: 'Creator Branding',
       tagline: 'Distinct Digital Identities That Command Attention',
-      description: 'Stand out in a crowded market with a unified aesthetic system—from video intro graphics to thumbnail design, typography, and channel art.',
+      description: 'Stand out in a crowded market with a unified visual system—from intro graphics to thumbnail design, typography, and channel art.',
       features: [
-        'High-CTR Thumbnail Design',
-        'Custom Motion Graphic Intros & Outros',
-        'Brand Color Palette & Font Hierarchy',
-        'Social Media Profile & Banner Overhauls'
+        'High-CTR Thumbnail Systems',
+        'Motion Intros & Outros',
+        'Brand Color Palette & Font Kits',
+        'Social Media Banner Overhauls'
       ],
       process: [
-        { step: '01', title: 'Brand Identity Audit', desc: 'Evaluating current channel aesthetics against top competitors.' },
-        { step: '02', title: 'Visual System Design', desc: 'Designing custom overlays, lower thirds, and logo reveals.' },
-        { step: '03', title: 'Asset Package Handoff', desc: 'Delivering easy-to-use brand kits for consistent content output.' }
+        { step: '01', title: 'Identity Audit', desc: 'Evaluating channel aesthetics.' },
+        { step: '02', title: 'System Design', desc: 'Designing custom graphics overlays.' },
+        { step: '03', title: 'Asset Handoff', desc: 'Delivering easy-to-use brand kits.' }
       ],
       benefits: [
-        'Instant brand recognition across platforms',
-        'Higher click-through rate (CTR) on videos',
-        'Professional authority that attracts brand deals'
-      ],
-      badgeColor: 'bg-pink-500/20 text-pink-300 border-pink-500/30'
+        'Instant brand recognition',
+        'Higher click-through rate (CTR)',
+        'Professional authority'
+      ]
     },
     {
       id: 'digital-growth',
       icon: TrendingUp,
       title: 'Digital Growth Strategy',
       tagline: 'Data-Driven Positioning & Audience Expansion',
-      description: 'Turn viewers into loyal subscribers and customers. We analyze analytics, optimize metadata, and build long-term distribution plans.',
+      description: 'Turn viewers into loyal subscribers and customers. We analyze analytics, optimize metadata, and build distribution plans.',
       features: [
-        'Analytics & Audience Retention Audits',
-        'Platform Optimization (SEO, Tags, Titles)',
-        'Cross-Platform Repurposing Workflows',
-        'Monetization & Sponsorship Readiness'
+        'Analytics & Retention Audits',
+        'Platform SEO & Title Testing',
+        'Cross-Platform Repurposing',
+        'Monetization Optimization'
       ],
       process: [
-        { step: '01', title: 'Performance Audit', desc: 'Deep dive into drop-off points, CTRs, and subscriber conversion.' },
-        { step: '02', title: 'Optimization Roadmap', desc: 'Implementing title/thumbnail AB testing and tag strategies.' },
-        { step: '03', title: 'Monthly Growth Reviews', desc: 'Iterating strategy based on real platform performance data.' }
+        { step: '01', title: 'Audit', desc: 'Deep dive into drop-off points.' },
+        { step: '02', title: 'Optimization', desc: 'Testing titles & thumbnails.' },
+        { step: '03', title: 'Reviews', desc: 'Iterating on real performance data.' }
       ],
       benefits: [
-        'Predictable channel growth curves',
-        'Maximizing reach across Reels, Shorts & YouTube',
-        'Monetization optimization'
-      ],
-      badgeColor: 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30'
+        'Predictable channel growth',
+        'Maximizing reach across platforms',
+        'Monetization readiness'
+      ]
     }
   ];
 
   return (
-    <div className="pt-28 pb-20 max-w-7xl mx-auto px-6 space-y-24">
+    <div className="pt-28 pb-20 max-w-5xl mx-auto px-6 space-y-16 sm:space-y-20">
       
       {/* HEADER */}
-      <section className="text-center max-w-3xl mx-auto space-y-6">
-        <span className="badge-pulse text-xs">Our Studio Services</span>
-        <h1 className="text-4xl md:text-6xl font-extrabold text-white brand-font tracking-tight">
+      <section className="text-center max-w-2xl mx-auto space-y-4">
+        <span className="badge-pulse text-[11px]">Capabilities</span>
+        <h1 className="text-3xl sm:text-5xl font-extrabold text-white brand-font tracking-tight leading-tight">
           Engineered for <span className="text-gradient">Maximum Impact.</span>
         </h1>
-        <p className="text-slate-300 text-base md:text-lg leading-relaxed">
-          From individual short-form edits to full creator channel management, we provide the technical and creative horsepower to elevate your brand.
+        <p className="text-slate-400 text-xs sm:text-sm leading-relaxed">
+          From short-form video editing to creator channel management, we elevate your digital brand.
         </p>
       </section>
 
+      {/* INTERACTIVE QUIZ */}
+      <section>
+        <BlueprintQuiz setActivePage={setActivePage} />
+      </section>
+
       {/* SERVICES LIST */}
-      <div className="space-y-16">
-        {servicesList.map((service, index) => {
+      <div className="space-y-8">
+        {servicesList.map((service) => {
           const Icon = service.icon;
-          const isEven = index % 2 === 0;
 
           return (
             <section 
               key={service.id}
-              className="glass-panel p-8 md:p-12 rounded-3xl border border-white/10 relative overflow-hidden space-y-10"
+              className="glass-card p-6 md:p-8 rounded-2xl border border-white/10 space-y-6"
             >
-              <div className="flex flex-col lg:flex-row lg:items-start justify-between gap-8 border-b border-white/10 pb-8">
+              <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4 border-b border-white/10 pb-5">
                 
-                {/* Service Header Info */}
-                <div className="space-y-4 max-w-2xl">
-                  <div className={`inline-flex items-center gap-2 px-3.5 py-1 rounded-full text-xs font-semibold border ${service.badgeColor}`}>
-                    <Icon className="w-4 h-4" />
+                <div className="space-y-2 max-w-xl">
+                  <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-medium bg-white/5 border border-white/10 text-indigo-300">
+                    <Icon className="w-3.5 h-3.5" />
                     <span>{service.tagline}</span>
                   </div>
-                  <h2 className="text-3xl md:text-4xl font-extrabold text-white brand-font">
+                  <h2 className="text-xl md:text-2xl font-bold text-white brand-font">
                     {service.title}
                   </h2>
-                  <p className="text-slate-300 text-sm md:text-base leading-relaxed">
+                  <p className="text-slate-300 text-xs leading-relaxed">
                     {service.description}
                   </p>
                 </div>
 
-                {/* Quick CTA button */}
-                <div className="shrink-0 pt-2">
-                  <button
-                    onClick={() => setActivePage('contact')}
-                    className="glow-btn-primary text-sm py-3 px-6"
-                  >
-                    <span>Book {service.title}</span>
-                    <ArrowRight className="w-4 h-4" />
-                  </button>
-                </div>
+                <button
+                  onClick={() => setActivePage('contact')}
+                  className="glow-btn-primary text-xs py-2 px-4 shrink-0 self-start"
+                >
+                  <span>Book Service</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </button>
 
               </div>
 
-              {/* Grid breakdown: Features & Benefits */}
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {/* Breakdown */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 
-                {/* Features Included */}
-                <div className="space-y-4">
-                  <h3 className="text-white font-bold text-base brand-font flex items-center gap-2">
-                    <Layers className="w-4 h-4 text-cyan-400" />
+                <div className="space-y-2.5">
+                  <h3 className="text-white font-semibold text-xs brand-font flex items-center gap-1.5">
+                    <Layers className="w-3.5 h-3.5 text-indigo-400" />
                     What's Included
                   </h3>
-                  <ul className="space-y-2.5">
+                  <ul className="space-y-1.5">
                     {service.features.map((feat, idx) => (
-                      <li key={idx} className="flex items-center gap-2.5 text-xs md:text-sm text-slate-300">
-                        <CheckCircle className="w-4 h-4 text-cyan-400 shrink-0" />
+                      <li key={idx} className="flex items-center gap-2 text-xs text-slate-300">
+                        <CheckCircle className="w-3.5 h-3.5 text-indigo-400 shrink-0" />
                         <span>{feat}</span>
                       </li>
                     ))}
                   </ul>
                 </div>
 
-                {/* Key Benefits */}
-                <div className="space-y-4">
-                  <h3 className="text-white font-bold text-base brand-font flex items-center gap-2">
-                    <Flame className="w-4 h-4 text-amber-400" />
+                <div className="space-y-2.5">
+                  <h3 className="text-white font-semibold text-xs brand-font flex items-center gap-1.5">
+                    <Shield className="w-3.5 h-3.5 text-emerald-400" />
                     Key Benefits
                   </h3>
-                  <ul className="space-y-2.5">
+                  <ul className="space-y-1.5">
                     {service.benefits.map((ben, idx) => (
-                      <li key={idx} className="flex items-center gap-2.5 text-xs md:text-sm text-slate-300">
-                        <Shield className="w-4 h-4 text-emerald-400 shrink-0" />
+                      <li key={idx} className="flex items-center gap-2 text-xs text-slate-300">
+                        <CheckCircle className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
                         <span>{ben}</span>
                       </li>
                     ))}
                   </ul>
                 </div>
 
-                {/* Process Steps */}
-                <div className="space-y-4 lg:col-span-1 md:col-span-2">
-                  <h3 className="text-white font-bold text-base brand-font flex items-center gap-2">
-                    <Cpu className="w-4 h-4 text-violet-400" />
-                    Our 3-Step Process
+                <div className="space-y-2.5">
+                  <h3 className="text-white font-semibold text-xs brand-font flex items-center gap-1.5">
+                    <Cpu className="w-3.5 h-3.5 text-sky-400" />
+                    3-Step Process
                   </h3>
-                  <div className="space-y-3">
+                  <div className="space-y-2">
                     {service.process.map((p, idx) => (
-                      <div key={idx} className="p-3 rounded-2xl bg-white/5 border border-white/10 flex items-start gap-3">
-                        <span className="text-xs font-bold text-cyan-400 bg-cyan-500/10 px-2 py-0.5 rounded-md">
+                      <div key={idx} className="p-2 rounded-lg bg-white/5 border border-white/10 flex items-start gap-2">
+                        <span className="text-[10px] font-semibold text-indigo-400 bg-indigo-500/10 px-1.5 py-0.5 rounded">
                           {p.step}
                         </span>
                         <div>
-                          <h4 className="text-xs font-semibold text-white brand-font">{p.title}</h4>
-                          <p className="text-[11px] text-slate-400 leading-tight">{p.desc}</p>
+                          <h4 className="text-xs font-semibold text-white">{p.title}</h4>
+                          <p className="text-[10px] text-slate-400">{p.desc}</p>
                         </div>
                       </div>
                     ))}
@@ -218,21 +212,21 @@ export default function ServicesPage({ setActivePage }) {
         })}
       </div>
 
-      {/* FINAL SERVICE CTA */}
-      <section className="glass-panel p-10 md:p-14 rounded-3xl border border-white/15 text-center space-y-6 relative overflow-hidden">
-        <h2 className="text-3xl md:text-4xl font-extrabold text-white brand-font">
+      {/* FINAL CTA */}
+      <section className="glass-card p-8 md:p-10 rounded-2xl border border-white/10 text-center space-y-4">
+        <h2 className="text-2xl md:text-3xl font-bold text-white brand-font">
           Ready to scale your content output?
         </h2>
-        <p className="text-slate-300 text-sm md:text-base max-w-xl mx-auto">
-          Let's discuss your project goals, content schedule, and custom package options.
+        <p className="text-slate-400 text-xs sm:text-sm max-w-md mx-auto leading-relaxed">
+          Let's discuss your project goals, schedule, and custom package options.
         </p>
         <div className="pt-2">
           <button
             onClick={() => setActivePage('contact')}
-            className="glow-btn-primary text-base py-3.5 px-8"
+            className="glow-btn-primary text-xs py-2.5 px-6"
           >
-            <span>Start A Project</span>
-            <ArrowRight className="w-4 h-4" />
+            <span>Start a Project</span>
+            <ArrowRight className="w-3.5 h-3.5" />
           </button>
         </div>
       </section>
@@ -240,3 +234,4 @@ export default function ServicesPage({ setActivePage }) {
     </div>
   );
 }
+
